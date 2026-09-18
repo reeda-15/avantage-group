@@ -63,7 +63,7 @@ if (!reduceMotion) {
     if (heroVisual && window.innerWidth > 700) {
       const progress = Math.min(1, Math.max(0, window.scrollY / 680));
       const ease = 1 - Math.pow(1 - progress, 2);
-      const startWidth = Math.min(window.innerWidth * 0.45, 560);
+      const startWidth = Math.min(window.innerWidth * (window.innerHeight <= 620 ? 0.30 : 0.33), 440, window.innerHeight <= 620 ? Math.max(150, (window.innerHeight - 255) * 1.75) : Infinity);
       const endWidth = Math.min(window.innerWidth * 0.83, 1120);
       heroVisual.style.width = `${startWidth + (endWidth - startWidth) * ease}px`;
       heroVisual.style.aspectRatio = `${1.75 + 0.12 * ease}`;
