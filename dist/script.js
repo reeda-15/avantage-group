@@ -32,6 +32,16 @@ if (inquiryForm) {
 }
 
 if (!reduceMotion) {
+  document.body.classList.add('has-motion');
+  const portfolioTargets = document.querySelectorAll('[data-portfolio-card],.home-team-grid article,.team-card');
+  const portfolioObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      portfolioObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px 8% 0px' });
+  portfolioTargets.forEach((element) => portfolioObserver.observe(element));
   const revealTargets = document.querySelectorAll('.statement h2,.statement-bottom,.sector-line,.boxed-heading,.work-intro,.case-card,.more-work,.all-work-cta,.services-title,.service-list article,.approach h2,.steps article,.contact h2,.contact>p,.contact-action,.inquiry,.works-hero h1,.works-row,.works-end h2');
   revealTargets.forEach((element, index) => {
     element.classList.add('motion-reveal');
@@ -59,7 +69,7 @@ if (!reduceMotion) {
       heroVisual.style.aspectRatio = `${1.75 + 0.12 * ease}`;
       heroVisual.style.setProperty('--scroll-shift', `${ease * 8}%`);
     }
-    document.querySelectorAll('.case-image img,.works-row-image img').forEach((image) => {
+    document.querySelectorAll('.case-image img,.works-row-image img,.portfolio-card-media img').forEach((image) => {
       const rect = image.getBoundingClientRect();
       if (rect.bottom < -100 || rect.top > window.innerHeight + 100) return;
       const center = rect.top + rect.height / 2;
