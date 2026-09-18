@@ -57,24 +57,23 @@ if (!reduceMotion) {
   revealTargets.forEach((element) => revealObserver.observe(element));
 
   const heroVisual = document.querySelector('.hero-visual');
-  const clientStrip = document.querySelector('.hero + .client-strip');
+  const heroVideoStage = heroVisual?.closest('.hero-video-stage');
   let scrollTicking = false;
   const updateScrollMotion = () => {
     scrollTicking = false;
-    if (heroVisual && window.innerWidth > 700) {
-      const progress = Math.min(1, Math.max(0, window.scrollY / 680));
+    if (heroVisual && heroVideoStage && window.innerWidth > 700) {
+      const stageTop = heroVideoStage.getBoundingClientRect().top + window.scrollY;
+      const travel = Math.max(1, heroVideoStage.offsetHeight - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, (window.scrollY - stageTop) / travel));
       const ease = 1 - Math.pow(1 - progress, 2);
       const startWidth = Math.min(window.innerWidth * (window.innerHeight <= 620 ? 0.30 : 0.33), 440, window.innerHeight <= 620 ? Math.max(150, (window.innerHeight - 255) * 1.75) : Infinity);
       const endWidth = Math.min(window.innerWidth * 0.83, 1120);
-      if (clientStrip) {
-        const heroBottom = heroVisual.closest('.hero').getBoundingClientRect().bottom + window.scrollY;
-        const visualTop = heroVisual.offsetParent.getBoundingClientRect().top + window.scrollY + heroVisual.offsetTop;
-        const clearance = Math.max(0, Math.ceil(visualTop + endWidth / 1.87 - heroBottom + 48));
-        clientStrip.style.marginTop = `${clearance}px`;
-      }
       heroVisual.style.width = `${startWidth + (endWidth - startWidth) * ease}px`;
       heroVisual.style.aspectRatio = `${1.75 + 0.12 * ease}`;
       heroVisual.style.setProperty('--scroll-shift', `${ease * 8}%`);
+    } else if (heroVisual) {
+      heroVisual.style.removeProperty('width');
+      heroVisual.style.removeProperty('aspect-ratio');
     }
     document.querySelectorAll('.case-image img,.works-row-image img,.portfolio-card-media img').forEach((image) => {
       const rect = image.getBoundingClientRect();
