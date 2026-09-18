@@ -57,21 +57,29 @@ if (!reduceMotion) {
   revealTargets.forEach((element) => revealObserver.observe(element));
 
   const heroVisual = document.querySelector('.hero-visual');
-  const heroVideoStage = heroVisual?.closest('.hero-video-stage');
+  const heroFlow = document.querySelector('.hero-flow');
+  const heroFloat = document.querySelector('.hero-floating-visual');
   let scrollTicking = false;
   const updateScrollMotion = () => {
     scrollTicking = false;
-    if (heroVisual && heroVideoStage && window.innerWidth > 700) {
-      const stageTop = heroVideoStage.getBoundingClientRect().top + window.scrollY;
-      const travel = Math.max(1, heroVideoStage.offsetHeight - window.innerHeight);
-      const progress = Math.min(1, Math.max(0, (window.scrollY - stageTop) / travel));
+    if (heroVisual && heroFlow && heroFloat && window.innerWidth > 700) {
+      const hero = heroFlow.querySelector('.hero');
+      const description = hero.querySelector('.hero-description');
+      const heroTop = heroFlow.getBoundingClientRect().top + window.scrollY;
+      const firstPageHeight = hero.offsetHeight;
+      const progress = Math.min(1, Math.max(0, (window.scrollY - heroTop) / firstPageHeight));
       const ease = 1 - Math.pow(1 - progress, 2);
-      const startWidth = Math.min(window.innerWidth * (window.innerHeight <= 620 ? 0.30 : 0.33), 440, window.innerHeight <= 620 ? Math.max(150, (window.innerHeight - 255) * 1.75) : Infinity);
-      const endWidth = Math.min(window.innerWidth * 0.83, 1120);
+      const startWidth = Math.min(window.innerWidth * (window.innerHeight <= 620 ? 0.30 : 0.33), 440, window.innerHeight <= 620 ? window.innerHeight * 0.6 : Infinity);
+      const endWidth = Math.min(window.innerWidth * 0.83, 1120, window.innerHeight * 1.7);
+      const startTop = hero.querySelector('.hero-center').offsetTop + description.offsetTop + description.offsetHeight + 12;
+      const endHeight = endWidth / 1.87;
+      const endTop = firstPageHeight + Math.max(0, (window.innerHeight - endHeight - 35) / 2);
+      heroFloat.style.top = `${startTop + (endTop - startTop) * ease}px`;
       heroVisual.style.width = `${startWidth + (endWidth - startWidth) * ease}px`;
       heroVisual.style.aspectRatio = `${1.75 + 0.12 * ease}`;
       heroVisual.style.setProperty('--scroll-shift', `${ease * 8}%`);
     } else if (heroVisual) {
+      heroFloat?.style.removeProperty('top');
       heroVisual.style.removeProperty('width');
       heroVisual.style.removeProperty('aspect-ratio');
     }
