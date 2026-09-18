@@ -29,9 +29,3 @@
 @media (min-width:701px) and (max-width:1000px){.portfolio-backdrop :is(h1,h2){top:72%;font-size:44vw}}
 @media(max-width:700px){.portfolio-backdrop :is(h1,h2){top:60%;font-size:90vw}}
 @media(max-width:700px){.people-portfolio .portfolio-cards{padding-bottom:45vh}}
-.people-portfolio .portfolio-backdrop{height:100vh;min-height:0}.people-portfolio .portfolio-backdrop :is(h1,h2){top:50%;font-size:min(112vh,54vw);transform:translate(-50%,-50%) scaleX(.54)}.people-portfolio .portfolio-cards{margin:0 auto;padding-top:10vh;padding-bottom:70vh}.people-portfolio .portfolio-rail{opacity:0;transition:opacity .35s ease}.people-portfolio.is-scrolling .portfolio-rail{opacity:1}
-@media(min-aspect-ratio:2.25){.people-portfolio .portfolio-backdrop :is(h1,h2){transform:translate(-50%,-50%) scaleX(.62)}}
-@media(max-width:700px){.people-portfolio .portfolio-backdrop :is(h1,h2){font-size:130vw;transform:translate(-50%,-50%) scaleX(.23) scaleY(1.65)}.people-portfolio .portfolio-cards{padding-top:5vh;padding-bottom:45vh}}
-.portfolio-page .site-header{background:var(--paper);border-bottom:1px solid var(--line)}
-@media(min-width:701px){.portfolio-page .people-portfolio .portfolio-backdrop :is(h1,h2){top:calc(50% + 40px);font-size:min(100vh,54vw);transform:translate(-50%,-50%) scaleX(.59)}}
-@media(min-width:701px) and (min-aspect-ratio:2.25){.portfolio-page .people-portfolio .portfolio-backdrop :is(h1,h2){transform:translate(-50%,-50%) scaleX(.7)}}

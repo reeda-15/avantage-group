@@ -15,16 +15,6 @@ if (menuToggle && siteNav) {
 }
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const peoplePortfolio = document.querySelector('.people-portfolio');
-if (peoplePortfolio) {
-  const updatePortfolioIntro = () => {
-    const bounds = peoplePortfolio.getBoundingClientRect();
-    peoplePortfolio.classList.toggle('is-scrolling', bounds.top < -window.innerHeight * 0.55 && bounds.bottom > window.innerHeight * 0.2);
-  };
-  window.addEventListener('scroll', updatePortfolioIntro, { passive: true });
-  window.addEventListener('resize', updatePortfolioIntro);
-  updatePortfolioIntro();
-}
 const inquiryForm = document.getElementById('inquiry-form');
 if (inquiryForm) {
   inquiryForm.addEventListener('submit', (event) => {
