@@ -29,3 +29,7 @@
 @media (min-width:701px) and (max-width:1000px){.portfolio-backdrop :is(h1,h2){top:72%;font-size:44vw}}
 @media(max-width:700px){.portfolio-backdrop :is(h1,h2){top:60%;font-size:90vw}}
 @media(max-width:700px){.people-portfolio .portfolio-cards{padding-bottom:45vh}}
+.people-portfolio .portfolio-backdrop :is(h1,h2){top:67%;font-size:30vw;transform:translate(-50%,-50%) scaleX(.96)}
+@media(max-width:700px){.people-portfolio .portfolio-backdrop :is(h1,h2){top:60%;font-size:70vw;transform:translate(-50%,-50%) scaleX(.41)}}
+.portfolio-page .people-portfolio .portfolio-rail{display:none}.portfolio-page .people-portfolio .portfolio-backdrop :is(h1,h2){top:50%}
+@media(max-height:600px){.portfolio-page .portfolio-backdrop{min-height:0}.portfolio-page .portfolio-cards{margin-top:-10vh}}
