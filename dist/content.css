@@ -43,3 +43,4 @@
 @media(max-width:700px){.hero{height:auto;min-height:0;padding-top:120px;overflow:hidden}.hero h1{font-size:clamp(4.2rem,13.5vw,6.7rem)}.hero-description{margin:26px auto 20px}.hero-visual{width:100%;aspect-ratio:1.35}.hero-under{margin-top:13px}.hero-tools{z-index:1}.hero-rail{position:static;margin:0 calc(-1*clamp(24px,6vw,100px))}.hero-tool--bl,.hero-tool--br{width:auto}}
 .client-strip{margin-top:clamp(0px,calc(940px - 100svh),300px)}
 @media(max-width:700px){.client-strip{margin-top:0}}
+.hero + .client-strip{z-index:3}.hero ~ .statement{position:relative;z-index:3;background:var(--paper)}
