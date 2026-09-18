@@ -34,3 +34,4 @@
 .portfolio-page .people-portfolio .portfolio-rail{display:none}.portfolio-page .people-portfolio .portfolio-backdrop :is(h1,h2){top:50%}
 @media(max-height:600px){.portfolio-page .portfolio-backdrop{min-height:0}.portfolio-page .portfolio-cards{margin-top:-10vh}}
 .portfolio-page .people-portfolio .portfolio-cards{padding-bottom:0}
+@media(min-width:701px){body:not(.portfolio-page) .people-portfolio .portfolio-backdrop :is(h1,h2){font-size:32vw;transform:translate(-50%,-50%) scaleX(1)}}
