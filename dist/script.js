@@ -57,6 +57,7 @@ if (!reduceMotion) {
   revealTargets.forEach((element) => revealObserver.observe(element));
 
   const heroVisual = document.querySelector('.hero-visual');
+  const heroTools = document.querySelector('.hero-tools');
   let scrollTicking = false;
   const updateScrollMotion = () => {
     scrollTicking = false;
@@ -68,6 +69,15 @@ if (!reduceMotion) {
       heroVisual.style.width = `${startWidth + (endWidth - startWidth) * ease}px`;
       heroVisual.style.aspectRatio = `${1.75 + 0.12 * ease}`;
       heroVisual.style.setProperty('--scroll-shift', `${ease * 8}%`);
+      if (heroTools) {
+        const visualRect = heroVisual.getBoundingClientRect();
+        const leftTool = heroTools.querySelector('.hero-tool--bl').getBoundingClientRect();
+        const rightTool = heroTools.querySelector('.hero-tool--br').getBoundingClientRect();
+        const gap = Math.min(visualRect.left - leftTool.right, rightTool.left - visualRect.right);
+        heroTools.style.setProperty('--corner-tool-opacity', String(Math.max(0, Math.min(1, gap / 70))));
+      }
+    } else if (heroTools) {
+      heroTools.style.removeProperty('--corner-tool-opacity');
     }
     document.querySelectorAll('.case-image img,.works-row-image img,.portfolio-card-media img').forEach((image) => {
       const rect = image.getBoundingClientRect();
