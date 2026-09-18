@@ -1,4 +1,18 @@
-document.getElementById('year').textContent = new Date().getFullYear();
+document.querySelectorAll('#year').forEach((year) => { year.textContent = new Date().getFullYear(); });
+const menuToggle = document.querySelector('.menu-toggle');
+const siteNav = document.getElementById('site-nav');
+if (menuToggle && siteNav) {
+  menuToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('is-open');
+    menuToggle.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      siteNav.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const inquiryForm = document.getElementById('inquiry-form');
@@ -8,10 +22,11 @@ if (inquiryForm) {
     const data = new FormData(inquiryForm);
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
+    const phone = String(data.get('phone') || '').trim();
     const message = String(data.get('message') || '').trim();
     if (!name || !email || !message) return;
     const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nWhat I would like to improve:\n${message}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ''}\n\nWhat I would like to improve:\n${message}`);
     window.location.href = `mailto:contact@avantageai.com?subject=${subject}&body=${body}`;
   });
 }
