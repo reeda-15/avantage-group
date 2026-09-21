@@ -13,31 +13,91 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="motion.css">
   <link rel="stylesheet" href="content.css">
+  <script>document.documentElement.classList.add('has-hero-intro')</script>
 </head>
 <body>
-  <header class="site-header" id="top">
+  <div class="hero-intro-screen paper-grid" data-hero-intro aria-label="Avantage AI introduction">
+    <div class="hero-intro-name">Avantage<span>.</span><small>AI</small></div>
+    <p>Intelligent systems, thoughtfully built.</p>
+  </div>
+  <header class="site-header home-header" id="top">
     <a class="brand" href="#top" aria-label="Avantage AI home">Avantage<span class="brand-dot">.</span><small>AI</small></a>
     <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button>
-    <nav id="site-nav" aria-label="Main navigation"><a href="works.html" data-page-link>Portfolio</a><a href="projects.html" data-page-link>Projects</a><a href="services.html" data-page-link>Services</a><a href="about.html" data-page-link>About</a><a href="blog.html" data-page-link>Insights</a><a href="contact.html" data-page-link>Contact</a></nav>
+    <nav id="site-nav" aria-label="Main navigation"><a href="works.html" data-page-link>Portfolio</a><a href="works.html#projects" data-page-link>Projects</a><a href="services.html" data-page-link>Services</a><a href="about.html" data-page-link>About</a><a href="blog.html" data-page-link>Insights</a><a href="contact.html" data-page-link>Contact</a></nav>
+    <a class="pill home-header-cta" href="contact.html" data-page-link>Start a project</a>
   </header>
 
   <main>
     <div class="hero-flow">
     <section class="hero paper-grid" aria-labelledby="hero-title">
-      <div class="hero-note note note-left">ideas into action <span aria-hidden="true">↗</span></div>
       <div class="hero-center"><h1 id="hero-title">Business runs<br><mark>better</mark> by design<span class="hero-period">.</span></h1><p class="hero-description">We shape AI automation and custom software around the way your business actually works.</p></div>
-      <div class="hero-tools" aria-label="AI tools">
-        <div class="hero-tool hero-tool--tl"><img src="assets/chatgpt-mark.webp" alt=""><strong>ChatGPT</strong><span>AI assistant</span></div>
-        <div class="hero-tool hero-tool--tr"><img src="assets/claude-mark.webp" alt=""><strong>Claude</strong><span>AI assistant</span></div>
-        <div class="hero-tool hero-tool--bl"><img src="assets/copilot-mark.webp" alt=""><strong>GitHub Copilot</strong><span>AI coding assistant</span></div>
-        <div class="hero-tool hero-tool--br"><img src="assets/gemini-mark.webp" alt=""><strong>Gemini</strong><span>AI assistant</span></div>
+      <div class="ai-network" data-ai-network aria-label="Avantage AI connected tool network">
+        <svg class="ai-network-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+          <path class="ai-network-path path-one" d="M600 95 C480 112 360 158 204 217"/>
+          <path class="ai-network-path path-two" d="M600 95 C720 112 840 158 996 217"/>
+          <path class="ai-network-path path-three" d="M600 95 C455 245 370 380 246 490"/>
+          <path class="ai-network-path path-four" d="M600 95 C745 245 830 380 954 490"/>
+          <path class="ai-network-path path-five" d="M600 95 C440 62 280 62 116 108"/>
+          <path class="ai-network-path path-six" d="M600 95 C500 55 410 50 330 80"/>
+          <path class="ai-network-path path-seven" d="M600 95 C700 55 790 50 870 80"/>
+          <path class="ai-network-path path-eight" d="M600 95 C760 62 920 62 1084 108"/>
+          <path class="ai-network-path path-nine" d="M600 95 C365 140 190 230 96 329"/>
+          <path class="ai-network-path path-ten" d="M600 95 C350 220 185 340 96 448"/>
+          <path class="ai-network-path path-eleven" d="M600 95 C380 300 260 445 164 560"/>
+          <path class="ai-network-path path-twelve" d="M600 95 C835 155 1010 260 1104 364"/>
+          <path class="ai-network-path path-thirteen" d="M600 95 C850 220 1015 340 1104 448"/>
+          <path class="ai-network-path path-fourteen" d="M600 95 C820 300 940 445 1036 560"/>
+          <path class="ai-network-path path-fifteen" d="M600 95 C540 270 430 420 330 532"/>
+          <circle class="ai-network-signal" r="5"><animateMotion dur="4.8s" begin=".2s" repeatCount="indefinite" path="M600 95 C480 112 360 158 204 217"/></circle>
+          <circle class="ai-network-signal" r="5"><animateMotion dur="5.2s" begin="1.1s" repeatCount="indefinite" path="M600 95 C720 112 840 158 996 217"/></circle>
+          <circle class="ai-network-signal" r="5"><animateMotion dur="5.6s" begin="2s" repeatCount="indefinite" path="M600 95 C455 245 370 380 246 490"/></circle>
+          <circle class="ai-network-signal" r="5"><animateMotion dur="5s" begin="2.8s" repeatCount="indefinite" path="M600 95 C745 245 830 380 954 490"/></circle>
+        </svg>
+        <div class="ai-network-core"><img src="assets/avantage-core.svg" alt="Avantage AI"><span>AI CORE</span></div>
+        <div class="ai-network-node node-openai" aria-label="ChatGPT"><img src="assets/chatgpt-mark.webp" alt=""><span>ChatGPT</span></div>
+        <div class="ai-network-node node-claude" aria-label="Claude"><img src="assets/claude-mark.webp" alt=""><span>Claude</span></div>
+        <div class="ai-network-node node-copilot" aria-label="GitHub Copilot"><img src="assets/copilot-mark.webp" alt=""><span>Copilot</span></div>
+        <div class="ai-network-node node-gemini" aria-label="Gemini"><img src="assets/gemini-mark.webp" alt=""><span>Gemini</span></div>
+        <div class="ai-network-node ai-network-node-small node-midjourney" aria-label="Midjourney"><img src="assets/ai-tools/midjourney-mark.svg" alt=""><span>Midjourney</span></div>
+        <div class="ai-network-node ai-network-node-small node-perplexity" aria-label="Perplexity"><img src="assets/ai-tools/perplexity-mark.svg" alt=""><span>Perplexity</span></div>
+        <div class="ai-network-node ai-network-node-small node-runway" aria-label="Runway"><img src="assets/ai-tools/runway-mark.svg" alt=""><span>Runway</span></div>
+        <div class="ai-network-node ai-network-node-small node-canva" aria-label="Canva"><img src="assets/ai-tools/canva-mark.svg" alt=""><span>Canva</span></div>
+        <div class="ai-network-node ai-network-node-small node-grok" aria-label="Grok"><img src="assets/ai-tools/grok-mark.svg" alt=""><span>Grok</span></div>
+        <div class="ai-network-node ai-network-node-small node-deepseek" aria-label="DeepSeek"><img src="assets/ai-tools/deepseek-mark.svg" alt=""><span>DeepSeek</span></div>
+        <div class="ai-network-node ai-network-node-small node-kling" aria-label="Kling AI"><img src="assets/ai-tools/kling-ai-mark.svg" alt=""><span>Kling AI</span></div>
+        <div class="ai-network-node ai-network-node-small node-suno" aria-label="Suno"><img src="assets/ai-tools/suno-mark.svg" alt=""><span>Suno</span></div>
+        <div class="ai-network-node ai-network-node-small node-lovable" aria-label="Lovable"><img src="assets/ai-tools/lovable-mark.svg" alt=""><span>Lovable</span></div>
+        <div class="ai-network-node ai-network-node-small node-replit" aria-label="Replit"><img src="assets/ai-tools/replit-mark.svg" alt=""><span>Replit</span></div>
+        <div class="ai-network-node ai-network-node-small node-leonardo" aria-label="Leonardo AI"><img src="assets/ai-tools/leonardo-ai-mark.svg" alt=""><span>Leonardo AI</span></div>
       </div>
-      <div class="hero-note note note-right">clearer systems,<br>calmer days <span aria-hidden="true">✳</span></div>
       <div class="hero-rail"><span class="scribble">think → build → improve</span><span class="scribble">scroll to explore ↓</span></div>
     </section>
 
+    <div class="hero-media-strip" aria-label="Media recognition">
+      <div class="hero-media-track">
+        <div class="hero-media-set">
+          <span class="hero-media-logo media-dainik"><img src="assets/media-logos-strip.png" alt="Dainik Bhaskar"></span>
+          <span class="hero-media-logo media-lokmat"><img src="assets/media-logos-strip.png" alt="Lokmat Times"></span>
+          <span class="hero-media-logo media-hitavada"><img src="assets/media-logos-strip.png" alt="The Hitavada"></span>
+          <span class="hero-media-logo media-bcn"><img src="assets/media-logos-strip.png" alt="BCN News"></span>
+          <span class="hero-media-logo media-ucn"><img src="assets/media-logos-strip.png" alt="UCN News"></span>
+          <span class="hero-media-logo media-nagpur"><img src="assets/media-logos-strip.png" alt="The Live Nagpur"></span>
+        </div>
+        <div class="hero-media-set" aria-hidden="true">
+          <span class="hero-media-logo media-dainik"><img src="assets/media-logos-strip.png" alt=""></span>
+          <span class="hero-media-logo media-lokmat"><img src="assets/media-logos-strip.png" alt=""></span>
+          <span class="hero-media-logo media-hitavada"><img src="assets/media-logos-strip.png" alt=""></span>
+          <span class="hero-media-logo media-bcn"><img src="assets/media-logos-strip.png" alt=""></span>
+          <span class="hero-media-logo media-ucn"><img src="assets/media-logos-strip.png" alt=""></span>
+          <span class="hero-media-logo media-nagpur"><img src="assets/media-logos-strip.png" alt=""></span>
+        </div>
+      </div>
+    </div>
     <section class="hero-video-stage paper-grid" aria-label="Ideas in motion"></section>
-    <div class="hero-floating-visual"><div class="hero-visual"><img src="assets/hero-office.png" alt="Modern office workspace with AI displays and city views"></div><p class="hero-under note">made for the work behind the work</p></div>
+    <div class="hero-floating-visual">
+      <div class="hero-visual"><img src="assets/hero-avantage-workspace.png" alt="Avantage AI workspace with connected automation systems and AI tools"></div>
+      <p class="hero-under note">made for the work behind the work</p>
+    </div>
     </div>
 
     <section class="client-strip" aria-label="Clients and partners">
@@ -75,15 +135,82 @@
       <div class="portfolio-outro"><span>02 / PORTFOLIO</span><a href="works.html" data-page-link>Meet the two people behind Avantage AI <span aria-hidden="true">↗</span></a></div>
     </section>
 
-    <section class="services section-pad" id="services" aria-labelledby="services-heading"><div class="section-label"><span>03 / WHAT WE DO</span><span class="scribble">thoughtfully made</span></div><div class="services-title"><p class="scribble">our services</p><h2 id="services-heading">Built around<br><mark>your workflow.</mark></h2><p>Purposeful technology for the operations that keep a business moving.</p></div><div class="service-list"><article><span class="service-num">01</span><h3>Custom ERP</h3><p>Inventory, billing, purchases, cash, suppliers, customers, roles, audit logs and owner dashboards.</p><span class="service-icon" aria-hidden="true">✳</span></article><article><span class="service-num">02</span><h3>Custom CRM</h3><p>Lead tracking, follow-ups, bookings, customer history, sales pipelines, branches and reporting.</p><span class="service-icon" aria-hidden="true">↗</span></article><article><span class="service-num">03</span><h3>AI automation</h3><p>WhatsApp follow-ups, reminders, lead routing, customer updates, approvals and reports.</p><span class="service-icon" aria-hidden="true">✦</span></article><article><span class="service-num">04</span><h3>Websites & apps</h3><p>Marketing sites, ecommerce, portals, mobile apps, dashboards and operational systems.</p><span class="service-icon" aria-hidden="true">◎</span></article></div><div class="home-services-link"><a class="pill" href="services.html" data-page-link>Explore every service <span aria-hidden="true">↗</span></a></div></section>
+    <section class="portfolio-projects paper-grid section-pad" id="projects" aria-labelledby="projects-heading"><div class="section-label"><span>03 / PROJECTS</span><span class="scribble">the work in practice</span></div><div class="portfolio-projects-heading"><p class="eyebrow">SELECTED WORK / 08 STORIES</p><h2 id="projects-heading">Made to make <em>work flow.</em></h2><p>Explore the systems, apps and websites we have built for real operations.</p></div><div class="archive-grid"><a class="archive-card" href="projects/btp-travel-crm.html" data-page-link><div class="archive-image"><img src="assets/project-btp.webp" alt="BTP Travel CRM project visual" loading="lazy"><span>01</span></div><div class="archive-meta"><span class="case-category">TRAVEL / CRM &amp; ACCOUNTING</span><h2>BTP Travel CRM</h2><p>A custom travel CRM and accounting system that unifies inquiries, bookings, customers, branches, payments, and marketing channel performance.</p><b aria-hidden="true">↗</b></div></a><a class="archive-card" href="projects/harshad-steel-erp.html" data-page-link><div class="archive-image"><img src="assets/project-harshad.webp" alt="Harshad Steel ERP project visual" loading="lazy"><span>02</span></div><div class="archive-meta"><span class="case-category">STEEL &amp; HARDWARE / ERP</span><h2>Harshad Steel ERP</h2><p>A custom ERP for steel and hardware operations covering inventory, sales bills, purchase bills, cash, customers, suppliers, roles, and audit logs.</p><b aria-hidden="true">↗</b></div></a><a class="archive-card" href="projects/vrc-plasto-plm.html" data-page-link><div class="archive-image"><img src="assets/project-vrc.webp" alt="VRC Plasto PLM project visual" loading="lazy"><span>03</span></div><div class="archive-meta"><span class="case-category">MANUFACTURING / PLM</span><h2>VRC Plasto PLM</h2><p>A product lifecycle management system for plastic parts manufacturing, digitising RFQ, feasibility, quotation, APQP, trials, PPAP, and SOP handover.</p><b aria-hidden="true">↗</b></div></a><a class="archive-card" href="projects/tickat-crm.html" data-page-link><div class="archive-image"><img src="assets/project-tickat.webp" alt="Tickat CRM project visual" loading="lazy"><span>04</span></div><div class="archive-meta"><span class="case-category">TRAVEL / CRM &amp; ACCOUNTING</span><h2>Tickat CRM</h2><p>A CRM and accounting platform for a Dubai travel operator, built to automate repetitive workflows and improve booking visibility.</p><b aria-hidden="true">↗</b></div></a><a class="archive-card" href="projects/quartzline-minerals.html" data-page-link><div class="archive-image"><div class="archive-type-art">Quartzline<br><i>Minerals</i></div><span>05</span></div><div class="archive-meta"><span class="case-category">MINERALS / WEBSITE</span><h2>Quartzline Minerals Website</h2><p>A corporate mining and minerals website with product catalog, certifications, capability storytelling, and inquiry routing.</p><b aria-hidden="true">↗</b></div></a><a class="archive-card" href="projects/playcobra.html" data-page-link><div class="archive-image"><img src="assets/project-playcobra.webp" alt="PlayCobra Mobile App project visual" loading="lazy"><span>06</span></div><div class="archive-meta"><span class="case-category">ENTERTAINMENT / MOBILE APP</span><h2>PlayCobra Mobile App</h2><p>A real-time multiplayer card game platform with virtual currency, tournaments, and operational game systems.</p><b aria-hidden="true">↗</b></div></a><a class="archive-card" href="projects/broker-seva.html" data-page-link><div class="archive-image"><img src="assets/project-broker.webp" alt="Broker Seva Mobile App project visual" loading="lazy"><span>07</span></div><div class="archive-meta"><span class="case-category">REAL ESTATE / MOBILE APP</span><h2>Broker Seva Mobile App</h2><p>A real estate broker mobile app for property inventory, requirement matching, broker networks, wallet flows, and listing workflows.</p><b aria-hidden="true">↗</b></div></a><a class="archive-card" href="projects/urban-hungry-media.html" data-page-link><div class="archive-image"><img src="assets/project-urban.png" alt="Urban Hungry Media Website project visual" loading="lazy"><span>08</span></div><div class="archive-meta"><span class="case-category">MARKETING / WEBSITE</span><h2>Urban Hungry Media Website</h2><p>A motion-led marketing website and editorial case-study experience for a content and brand growth agency.</p><b aria-hidden="true">↗</b></div></a></div></section>
 
-    <section class="approach paper-grid section-pad" aria-labelledby="approach-heading"><div class="section-label"><span>04 / OUR APPROACH</span><span class="scribble">simple steps, useful outcomes</span></div><h2 id="approach-heading">From messy process<br>to <mark>clear direction.</mark></h2><div class="steps"><article><span>01</span><h3>Understand</h3><p>We map the work, the people and the places where information gets lost.</p></article><article><span>02</span><h3>Shape</h3><p>We design a system around the way your team needs to move.</p></article><article><span>03</span><h3>Build</h3><p>We bring the workflow to life, test it with real use and refine the details.</p></article></div></section>
+    <section class="operating-rhythm paper-grid section-pad" id="approach" aria-labelledby="rhythm-heading">
+      <div class="section-label"><span>04 / OUR APPROACH</span><span class="scribble">from idea to operation</span></div>
+      <h2 id="rhythm-heading">A three-act <mark><em>operating</em></mark> rhythm.</h2>
+      <div class="rhythm-steps">
+        <article><div class="rhythm-meta"><span>(01)</span><span>Week 1 – 2</span></div><h3>Discover.</h3><p>Deep-dive into your business. Decode the industry, audit every workflow, surface the leverage points.</p></article>
+        <article><div class="rhythm-meta"><span>(02)</span><span>Week 2 – 6</span></div><h3>Design.</h3><p>Engineer the solution: workflows, schemas, automations, interfaces. Built for what you actually do.</p></article>
+        <article><div class="rhythm-meta"><span>(03)</span><span>Ongoing</span></div><h3>Dominate.</h3><p>Deploy. You set new benchmarks and become the standard. We stay on for iteration.</p></article>
+      </div>
+    </section>
+    <section class="services section-pad" id="services" aria-labelledby="services-heading"><div class="section-label"><span>05 / WHAT WE DO</span><span class="scribble">thoughtfully made</span></div><div class="services-title"><p class="scribble">our services</p><h2 id="services-heading">Built around<br><mark>your workflow.</mark></h2><p>Purposeful technology for the operations that keep a business moving.</p></div><div class="service-list"><article><span class="service-num">01</span><h3>Custom ERP</h3><p>Inventory, billing, purchases, cash, suppliers, customers, roles, audit logs and owner dashboards.</p><span class="service-icon" aria-hidden="true">✳</span></article><article><span class="service-num">02</span><h3>Custom CRM</h3><p>Lead tracking, follow-ups, bookings, customer history, sales pipelines, branches and reporting.</p><span class="service-icon" aria-hidden="true">↗</span></article><article><span class="service-num">03</span><h3>AI automation</h3><p>WhatsApp follow-ups, reminders, lead routing, customer updates, approvals and reports.</p><span class="service-icon" aria-hidden="true">✦</span></article><article><span class="service-num">04</span><h3>Websites & apps</h3><p>Marketing sites, ecommerce, portals, mobile apps, dashboards and operational systems.</p><span class="service-icon" aria-hidden="true">◎</span></article></div><div class="home-services-link"><a class="pill" href="services.html" data-page-link>Explore every service <span aria-hidden="true">↗</span></a></div></section>
 
-    <section class="home-insights section-pad paper-grid"><div class="section-label"><span>05 / INSIGHTS</span><span class="scribble">clear guides for owners</span></div><div class="home-insights-heading"><h2>Useful thinking for<br><mark>better systems.</mark></h2><p>Practical guides to automation, ERP, CRM, WhatsApp workflows and owner dashboards.</p></div><div class="home-insights-list"><a href="articles/automate-repetitive-business-tasks.html" data-page-link><span>AI AUTOMATION</span><strong>How to Automate Repetitive Business Tasks Without Confusing Your Team</strong><b>↗</b></a><a href="articles/business-dashboard-for-owner-control.html" data-page-link><span>BUSINESS DASHBOARDS</span><strong>What a Business Owner Dashboard Should Show Every Day</strong><b>↗</b></a><a href="articles/custom-crm-for-travel-agencies.html" data-page-link><span>CRM DEVELOPMENT</span><strong>What a Custom CRM Can Do for a Travel Agency</strong><b>↗</b></a></div><a class="pill" href="blog.html" data-page-link>Read all six guides <span aria-hidden="true">↗</span></a></section>
 
-    <section class="contact section-pad" id="contact" aria-labelledby="contact-heading"><div class="section-label"><span>06 / GET IN TOUCH</span><span class="scribble">your next step starts here</span></div><h2 id="contact-heading">Have a process<br>worth <mark>rethinking?</mark></h2><p>Tell us what takes too much time, gets missed, or needs a clearer view. We can work out what a better system looks like.</p><div class="contact-action"><span class="scribble">let's make it work ↓</span><a class="pill big-pill" href="contact.html" data-page-link>Start a conversation <span aria-hidden="true">↗</span></a></div><div class="home-contact-info"><span>NAGPUR, MAHARASHTRA, INDIA</span><a href="tel:+919270856871">+91 92708 56871</a><a href="mailto:contact@avantageai.com">contact@avantageai.com</a></div></section>
+
+    <section class="home-testimonials section-pad" id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="section-label"><span>06 / IN THEIR WORDS</span><span class="scribble">real people, real changes</span></div>
+      <h2 id="testimonials-heading">Clients who run on <em>systems.</em></h2>
+      <div class="testimonial-rail" aria-label="Client testimonials"><button class="testimonial-portrait is-active" type="button" data-testimonial="0" aria-label="Read Siraj's testimonial" aria-pressed="true" style="--mobile-column:1;--mobile-row:1"><img src="assets/testimonials/siraj.jpg" alt="Siraj" loading="lazy"><span>Siraj</span></button><button class="testimonial-portrait" type="button" data-testimonial="1" aria-label="Read Ankush's testimonial" aria-pressed="false" style="--mobile-column:2;--mobile-row:1"><img src="assets/testimonials/ankush.jpg" alt="Ankush" loading="lazy"><span>Ankush</span></button><button class="testimonial-portrait" type="button" data-testimonial="2" aria-label="Read Shubham's testimonial" aria-pressed="false" style="--mobile-column:3;--mobile-row:1"><img src="assets/testimonials/shubham.jpg" alt="Shubham" loading="lazy"><span>Shubham</span></button><button class="testimonial-portrait" type="button" data-testimonial="3" aria-label="Read Harshad's testimonial" aria-pressed="false" style="--mobile-column:4;--mobile-row:1"><img src="assets/testimonials/harshad.jpg" alt="Harshad" loading="lazy"><span>Harshad</span></button><button class="testimonial-portrait" type="button" data-testimonial="4" aria-label="Read Faizan's testimonial" aria-pressed="false" style="--mobile-column:1;--mobile-row:2"><img src="assets/testimonials/faizan.jpg" alt="Faizan" loading="lazy"><span>Faizan</span></button><button class="testimonial-portrait" type="button" data-testimonial="5" aria-label="Read Sadiya's testimonial" aria-pressed="false" style="--mobile-column:2;--mobile-row:2"><img src="assets/testimonials/sadiya.jpg" alt="Sadiya" loading="lazy"><span>Sadiya</span></button><button class="testimonial-portrait" type="button" data-testimonial="6" aria-label="Read Mahek's testimonial" aria-pressed="false" style="--mobile-column:3;--mobile-row:2"><img src="assets/testimonials/mahek.jpg" alt="Mahek" loading="lazy"><span>Mahek</span></button><button class="testimonial-portrait" type="button" data-testimonial="7" aria-label="Read Daksh's testimonial" aria-pressed="false" style="--mobile-column:4;--mobile-row:2"><img src="assets/testimonials/daksh.jpg" alt="Daksh" loading="lazy"><span>Daksh</span></button>
+        <figure class="testimonial-story" aria-live="polite">
+          <blockquote>“Avantage AI completely transformed the way we handle our accounting and vendor payments. Earlier, managing payments and accounts across two companies used to be a nightmare. Now, everything runs on autopilot — reminders, reconciliations, and even payment scheduling. It's like having an accountant who never sleeps. I've saved countless hours every week, and my team finally has time to focus on growing the business instead of chasing paperwork.”</blockquote>
+          <figcaption><strong>Siraj</strong><span>Owner at BTP Group</span></figcaption>
+        </figure>
+      </div>
+      <div class="testimonial-count"><span>01 / 08</span><span>SELECT A PORTRAIT TO READ THEIR STORY ↗</span></div>
+    </section>
+
+    <section class="home-insights section-pad paper-grid"><div class="section-label"><span>07 / INSIGHTS</span><span class="scribble">clear guides for owners</span></div><div class="home-insights-heading"><h2>Useful thinking for<br><mark>better systems.</mark></h2><p>Practical guides to automation, ERP, CRM, WhatsApp workflows and owner dashboards.</p></div><div class="home-insights-list"><a href="articles/automate-repetitive-business-tasks.html" data-page-link><span>AI AUTOMATION</span><strong>How to Automate Repetitive Business Tasks Without Confusing Your Team</strong><b>↗</b></a><a href="articles/business-dashboard-for-owner-control.html" data-page-link><span>BUSINESS DASHBOARDS</span><strong>What a Business Owner Dashboard Should Show Every Day</strong><b>↗</b></a><a href="articles/custom-crm-for-travel-agencies.html" data-page-link><span>CRM DEVELOPMENT</span><strong>What a Custom CRM Can Do for a Travel Agency</strong><b>↗</b></a></div><a class="pill" href="blog.html" data-page-link>Read all six guides <span aria-hidden="true">↗</span></a></section>
+
+    <section class="contact section-pad" id="contact" aria-labelledby="contact-heading"><div class="section-label"><span>08 / GET IN TOUCH</span><span class="scribble">your next step starts here</span></div><h2 id="contact-heading">Have a process<br>worth <mark>rethinking?</mark></h2><p>Tell us what takes too much time, gets missed, or needs a clearer view. We can work out what a better system looks like.</p><div class="contact-action"><span class="scribble">let's make it work ↓</span><a class="pill big-pill" href="contact.html" data-page-link>Start a conversation <span aria-hidden="true">↗</span></a></div><div class="home-contact-info"><span>NAGPUR, MAHARASHTRA, INDIA</span><a href="tel:+919270856871">+91 92708 56871</a><a href="mailto:contact@avantageai.com">contact@avantageai.com</a></div></section>
   </main>
-  <footer class="footer section-pad"><a class="footer-brand" href="#top">Avantage<span>.</span><small>AI</small></a><div class="footer-detail"><p>Custom software and AI automation for owners who want operations to run without constant manual control.</p><div><strong>Visit</strong><span>Nagpur, Maharashtra, India</span></div><div><strong>Call</strong><a href="tel:+919270856871">+91 92708 56871</a></div><div><strong>Email</strong><a href="mailto:contact@avantageai.com">contact@avantageai.com</a></div></div><div class="footer-line"><span>TECHNOLOGY THAT MAKES WORK FLOW</span><span>© <span id="year">2026</span> AVANTAGE AI</span><a href="#top">BACK TO TOP ↑</a></div></footer>
-  <script src="script.js" defer></script>
+  <footer class="footer mega-footer section-pad" id="site-footer">
+    <div class="footer-intro">
+      <p class="footer-kicker">INDEPENDENT AI &amp; SOFTWARE STUDIO · NAGPUR, INDIA</p>
+      <h2>Systems that make work <em>flow.</em></h2>
+      <p class="footer-lead">AI automation, ERP, CRM, apps, and websites for businesses that need systems that work.</p>
+      <a class="pill footer-cta" href="contact.html" data-page-link>Start a conversation <span>↗</span></a>
+    </div>
+    <div class="footer-directory">
+      <div class="footer-about">
+        <a class="footer-brand" href="index.html" data-page-link>Avantage<span>.</span><small>AI</small></a>
+        <p>We help owners replace scattered manual work with connected software that tracks operations, automates follow-up, and makes performance visible.</p>
+        <div class="footer-facts"><span><b>2023</b>Founded</span><span><b>02</b>Core leads</span><span><b>09</b>Industries</span></div>
+      </div>
+      <nav class="footer-column" aria-label="Footer navigation">
+        <strong>Explore</strong>
+        <a href="index.html" data-page-link>Home <span>↗</span></a>
+        <a href="works.html" data-page-link>Portfolio <span>↗</span></a>
+        <a href="works.html#projects" data-page-link>Projects <span>↗</span></a>
+        <a href="services.html" data-page-link>Services <span>↗</span></a>
+        <a href="about.html" data-page-link>About <span>↗</span></a>
+        <a href="blog.html" data-page-link>Insights <span>↗</span></a>
+        <a href="contact.html" data-page-link>Contact <span>↗</span></a>
+      </nav>
+      <div class="footer-column">
+        <strong>Capabilities</strong>
+        <a href="services.html" data-page-link>AI automation</a>
+        <a href="services.html" data-page-link>Custom ERP &amp; CRM</a>
+        <a href="services.html" data-page-link>Websites &amp; apps</a>
+        <a href="services.html" data-page-link>Marketing automation</a>
+        <a href="services.html" data-page-link>E-commerce systems</a>
+        <a href="services.html" data-page-link>Complex platforms</a>
+      </div>
+      <div class="footer-column footer-contact">
+        <strong>Contact</strong>
+        <a href="mailto:contact@avantageai.com">contact@avantageai.com</a>
+        <a href="tel:+919270856871">+91 92708 56871</a>
+        <span>Sumit Apartments<br>Nagpur, Maharashtra<br>440024, India</span>
+      </div>
+    </div>
+    <div class="footer-industries">
+      <strong>Industries we understand</strong>
+      <div><span>Travel</span><span>Manufacturing</span><span>Real estate</span><span>Steel &amp; hardware</span><span>Retail</span><span>Interiors</span><span>Marketing</span><span>E-commerce</span><span>Services</span></div>
+    </div>
+    <div class="footer-line"><span>TECHNOLOGY THAT MAKES WORK FLOW</span><span>© <span id="year">2026</span> AVANTAGE AI</span><a href="#top">BACK TO TOP ↑</a></div>
+  </footer>
+  <script src="vendor/gsap.min.js" defer></script><script src="script.js" defer></script>
 </body>
 </html>
