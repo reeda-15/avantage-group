@@ -140,6 +140,7 @@
   gsap.set(orb, { scale: 0, opacity: 0, transformOrigin: '50% 50%' });
   gsap.set(signal, { scaleX: 0, opacity: 0, transformOrigin: '50% 50%' });
   gsap.set(brand, { autoAlpha: 0 });
+  gsap.set(media, { filter: 'blur(0px)', scale: 1 });
   gsap.set([...brand.children], { y: 24, opacity: 0 });
   timeline = gsap.timeline({
     defaults: { ease: 'none' },
@@ -158,7 +159,9 @@
     .to(orb, { scale: 1.65, duration: .022 }, .92)
     .to(signal, { scaleX: 1, opacity: 1, duration: .032 }, .932)
     .to(orb, { scale: .1, opacity: 0, duration: .016 }, .951)
-    .to(wash, { opacity: 1, duration: .032 }, .955)
+    // Keep the held four-agent image behind the final, sharp HTML copy.
+    .to(wash, { opacity: .68, duration: .032 }, .955)
+    .to(media, { filter: 'blur(3px)', scale: 1.012, duration: .032 }, .955)
     .to(hero, { '--scene-shade': 0, duration: .032 }, .955)
     .to(signal, { opacity: 0, duration: .012 }, .966)
     .to(brand, { autoAlpha: 1, duration: .004 }, .973)
