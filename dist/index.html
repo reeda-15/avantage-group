@@ -13,13 +13,9 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="motion.css">
   <link rel="stylesheet" href="content.css">
-  <script>document.documentElement.classList.add('has-hero-intro')</script>
+  <link rel="stylesheet" href="cinematic.css">
 </head>
-<body>
-  <div class="hero-intro-screen paper-grid" data-hero-intro aria-label="Avantage AI introduction">
-    <div class="hero-intro-name">Avantage<span>.</span><small>AI</small></div>
-    <p>Intelligent systems, thoughtfully built.</p>
-  </div>
+<body class="cinematic-page">
   <header class="site-header home-header" id="top">
     <a class="brand" href="#top" aria-label="Avantage AI home">Avantage<span class="brand-dot">.</span><small>AI</small></a>
     <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button>
@@ -28,52 +24,43 @@
   </header>
 
   <main>
-    <div class="hero-flow">
-    <section class="hero paper-grid" aria-labelledby="hero-title">
-      <div class="hero-center"><h1 id="hero-title">Business runs<br><mark>better</mark> by design<span class="hero-period">.</span></h1><p class="hero-description">We shape AI automation and custom software around the way your business actually works.</p></div>
-      <div class="ai-network" data-ai-network aria-label="Avantage AI connected tool network">
-        <svg class="ai-network-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
-          <path class="ai-network-path path-one" d="M600 95 C480 112 360 158 204 217"/>
-          <path class="ai-network-path path-two" d="M600 95 C720 112 840 158 996 217"/>
-          <path class="ai-network-path path-three" d="M600 95 C455 245 370 380 246 490"/>
-          <path class="ai-network-path path-four" d="M600 95 C745 245 830 380 954 490"/>
-          <path class="ai-network-path path-five" d="M600 95 C440 62 280 62 116 108"/>
-          <path class="ai-network-path path-six" d="M600 95 C500 55 410 50 330 80"/>
-          <path class="ai-network-path path-seven" d="M600 95 C700 55 790 50 870 80"/>
-          <path class="ai-network-path path-eight" d="M600 95 C760 62 920 62 1084 108"/>
-          <path class="ai-network-path path-nine" d="M600 95 C365 140 190 230 96 329"/>
-          <path class="ai-network-path path-ten" d="M600 95 C350 220 185 340 96 448"/>
-          <path class="ai-network-path path-eleven" d="M600 95 C380 300 260 445 164 560"/>
-          <path class="ai-network-path path-twelve" d="M600 95 C835 155 1010 260 1104 364"/>
-          <path class="ai-network-path path-thirteen" d="M600 95 C850 220 1015 340 1104 448"/>
-          <path class="ai-network-path path-fourteen" d="M600 95 C820 300 940 445 1036 560"/>
-          <path class="ai-network-path path-fifteen" d="M600 95 C540 270 430 420 330 532"/>
-          <circle class="ai-network-signal" r="5"><animateMotion dur="4.8s" begin=".2s" repeatCount="indefinite" path="M600 95 C480 112 360 158 204 217"/></circle>
-          <circle class="ai-network-signal" r="5"><animateMotion dur="5.2s" begin="1.1s" repeatCount="indefinite" path="M600 95 C720 112 840 158 996 217"/></circle>
-          <circle class="ai-network-signal" r="5"><animateMotion dur="5.6s" begin="2s" repeatCount="indefinite" path="M600 95 C455 245 370 380 246 490"/></circle>
-          <circle class="ai-network-signal" r="5"><animateMotion dur="5s" begin="2.8s" repeatCount="indefinite" path="M600 95 C745 245 830 380 954 490"/></circle>
+    <section class="cinematic" data-cinematic aria-labelledby="cinematic-title">
+      <div class="cinematic-media" aria-hidden="true">
+        <img class="cinematic-poster" src="assets/cinematic/poster.webp" alt="" width="1280" height="720" fetchpriority="high">
+          <video class="cinematic-video" data-src="assets/cinematic/phase-1.mp4" preload="none" muted playsinline disablepictureinpicture aria-hidden="true"></video>
+          <video class="cinematic-video" data-src="assets/cinematic/phase-2.mp4" preload="none" muted playsinline disablepictureinpicture aria-hidden="true"></video>
+          <video class="cinematic-video" data-src="assets/cinematic/phase-3.mp4" preload="none" muted playsinline disablepictureinpicture aria-hidden="true"></video>
+          <video class="cinematic-video" data-src="assets/cinematic/phase-4.mp4" preload="none" muted playsinline disablepictureinpicture aria-hidden="true"></video>
+          <video class="cinematic-video" data-src="assets/cinematic/phase-5.mp4" preload="none" muted playsinline disablepictureinpicture aria-hidden="true"></video>
+        <canvas class="cinematic-canvas" width="1280" height="720"></canvas>
+        <svg class="cinematic-overlay" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="cinematic-pearl"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff9e9"/><stop offset="1" stop-color="#dcd3ed"/></radialGradient>
+            <filter id="cinematic-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="9"/></filter>
+          </defs>
+          <g fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="cinematic-connection" pathLength="1" stroke="#eac7af" d="M402 220 Q435 408 640 408"/>
+            <path class="cinematic-connection" pathLength="1" stroke="#c2cbdf" d="M904 221 Q857 408 640 408"/>
+            <path class="cinematic-connection" pathLength="1" stroke="#c5d1ba" d="M405 509 Q440 408 640 408"/>
+            <path class="cinematic-connection" pathLength="1" stroke="#d4bcdf" d="M914 510 Q850 408 640 408"/>
+          </g>
+          <g class="cinematic-orb"><circle cx="640" cy="408" r="35" fill="#fff6d9" filter="url(#cinematic-glow)"/><circle cx="640" cy="408" r="19" fill="url(#cinematic-pearl)"/></g>
+          <path class="cinematic-signal" d="M0 408 H1280" stroke="#fffdf4" stroke-width="1.5"/>
         </svg>
-        <div class="ai-network-core"><img src="assets/avantage-core.svg" alt="Avantage AI"><span>AI CORE</span></div>
-        <div class="ai-network-node node-openai" aria-label="ChatGPT"><img src="assets/chatgpt-mark.webp" alt=""><span>ChatGPT</span></div>
-        <div class="ai-network-node node-claude" aria-label="Claude"><img src="assets/claude-mark.webp" alt=""><span>Claude</span></div>
-        <div class="ai-network-node node-copilot" aria-label="GitHub Copilot"><img src="assets/copilot-mark.webp" alt=""><span>Copilot</span></div>
-        <div class="ai-network-node node-gemini" aria-label="Gemini"><img src="assets/gemini-mark.webp" alt=""><span>Gemini</span></div>
-        <div class="ai-network-node ai-network-node-small node-midjourney" aria-label="Midjourney"><img src="assets/ai-tools/midjourney-mark.svg" alt=""><span>Midjourney</span></div>
-        <div class="ai-network-node ai-network-node-small node-perplexity" aria-label="Perplexity"><img src="assets/ai-tools/perplexity-mark.svg" alt=""><span>Perplexity</span></div>
-        <div class="ai-network-node ai-network-node-small node-runway" aria-label="Runway"><img src="assets/ai-tools/runway-mark.svg" alt=""><span>Runway</span></div>
-        <div class="ai-network-node ai-network-node-small node-canva" aria-label="Canva"><img src="assets/ai-tools/canva-mark.svg" alt=""><span>Canva</span></div>
-        <div class="ai-network-node ai-network-node-small node-grok" aria-label="Grok"><img src="assets/ai-tools/grok-mark.svg" alt=""><span>Grok</span></div>
-        <div class="ai-network-node ai-network-node-small node-deepseek" aria-label="DeepSeek"><img src="assets/ai-tools/deepseek-mark.svg" alt=""><span>DeepSeek</span></div>
-        <div class="ai-network-node ai-network-node-small node-kling" aria-label="Kling AI"><img src="assets/ai-tools/kling-ai-mark.svg" alt=""><span>Kling AI</span></div>
-        <div class="ai-network-node ai-network-node-small node-suno" aria-label="Suno"><img src="assets/ai-tools/suno-mark.svg" alt=""><span>Suno</span></div>
-        <div class="ai-network-node ai-network-node-small node-lovable" aria-label="Lovable"><img src="assets/ai-tools/lovable-mark.svg" alt=""><span>Lovable</span></div>
-        <div class="ai-network-node ai-network-node-small node-replit" aria-label="Replit"><img src="assets/ai-tools/replit-mark.svg" alt=""><span>Replit</span></div>
-        <div class="ai-network-node ai-network-node-small node-leonardo" aria-label="Leonardo AI"><img src="assets/ai-tools/leonardo-ai-mark.svg" alt=""><span>Leonardo AI</span></div>
       </div>
-      <div class="hero-rail"><span class="scribble">think → build → improve</span><span class="scribble">scroll to explore ↓</span></div>
+      <div class="cinematic-wash" aria-hidden="true"></div>
+      <div class="cinematic-brand">
+        <span class="cinematic-eyebrow">A brighter way to work</span>
+        <h1 id="cinematic-title">AVANTAGE AI</h1>
+        <p>AI Agents · Automation · Software</p>
+        <a class="pill" href="contact.html" data-page-link>Start a project <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="cinematic-controls"><span class="cinematic-eyebrow">Scroll to explore</span><a href="#after-cinematic" data-cinematic-skip>Skip introduction ↓</a></div>
+      <div class="cinematic-progress" aria-hidden="true"></div>
+      <aside class="cinematic-review" aria-label="Cinematic review notes"></aside>
     </section>
 
-    <div class="hero-media-strip" aria-label="Media recognition">
+    <div class="hero-media-strip cinematic-media-strip" aria-label="Media recognition">
       <div class="hero-media-track">
         <div class="hero-media-set">
           <span class="hero-media-logo media-dainik"><img src="assets/media-logos-strip.png" alt="Dainik Bhaskar"></span>
@@ -93,14 +80,8 @@
         </div>
       </div>
     </div>
-    <section class="hero-video-stage paper-grid" aria-label="Ideas in motion"></section>
-    <div class="hero-floating-visual">
-      <div class="hero-visual"><img src="assets/hero-avantage-workspace.png" alt="Avantage AI workspace with connected automation systems and AI tools"></div>
-      <p class="hero-under note">made for the work behind the work</p>
-    </div>
-    </div>
 
-    <section class="client-strip" aria-label="Clients and partners">
+    <section id="after-cinematic" tabindex="-1" class="client-strip" aria-label="Clients and partners">
       <div class="client-strip-heading"><span>IN GOOD COMPANY</span><span>BUSINESSES WE'VE WORKED WITH ↗</span></div>
       <div class="client-marquee"><div class="client-track">
         <div class="client-logo-set">
@@ -211,6 +192,6 @@
     </div>
     <div class="footer-line"><span>TECHNOLOGY THAT MAKES WORK FLOW</span><span>© <span id="year">2026</span> AVANTAGE AI</span><a href="#top">BACK TO TOP ↑</a></div>
   </footer>
-  <script src="vendor/gsap.min.js" defer></script><script src="script.js" defer></script>
+  <script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="cinematic-time.js" defer></script><script src="cinematic.js" defer></script><script src="script.js" defer></script>
 </body>
 </html>

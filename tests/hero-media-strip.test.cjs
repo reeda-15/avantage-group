@@ -5,7 +5,7 @@ const html = fs.readFileSync('dist/index.html', 'utf8');
 const css = fs.readFileSync('dist/content.css', 'utf8');
 const script = fs.readFileSync('dist/script.js', 'utf8');
 
-assert.match(html, /class="hero-media-strip"/, 'second hero screen contains the media strip');
+assert.match(html, /class="hero-media-strip cinematic-media-strip"/, 'media strip remains after the cinematic');
 assert.ok((html.match(/media-logos-strip\.png/g) || []).length >= 2, 'strip image is duplicated for a seamless loop');
 assert.match(css, /@keyframes hero-media-marquee/, 'media strip has an infinite marquee animation');
 assert.match(css, /animation:[^;}]*hero-media-marquee[^;}]*infinite/, 'marquee repeats forever');

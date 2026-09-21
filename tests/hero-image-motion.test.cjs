@@ -1,16 +1,13 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-
-const html = fs.readFileSync('dist/index.html', 'utf8');
-const css = fs.readFileSync('dist/content.css', 'utf8');
-const script = fs.readFileSync('dist/script.js', 'utf8');
-
-assert.match(html, /class="hero-flow"/, 'hero flow wrapper is restored');
-assert.match(html, /class="hero-video-stage/, 'second-stage canvas is restored');
-assert.match(html, /class="hero-floating-visual"/, 'animated visual is restored');
-assert.match(html, /assets\/hero-avantage-workspace\.png/, 'approved Avantage AI workspace image is used');
-assert.match(css, /\.hero-floating-visual/, 'floating visual layout exists');
-assert.match(script, /const heroVisual = document\.querySelector\('\.hero-visual'\)/, 'scroll expansion controller exists');
-assert.match(script, /heroVisual\.style\.width/, 'scroll expansion changes image width');
-
-console.log('hero image motion contract verified');
+const html = fs.readFileSync('dist/index.html','utf8');
+const videos=[...html.matchAll(/<video\b[^>]*>/g)].map(m=>m[0]);
+assert.equal(videos.length,5);
+for(const video of videos) {
+  assert.match(video,/preload="none"/);
+  assert.match(video,/muted playsinline/);
+  assert.doesNotMatch(video,/autoplay|loop|(?<!data-)src=/);
+}
+for(let i=1;i<=5;i++) assert.ok(fs.statSync('dist/assets/cinematic/phase-'+i+'.mp4').size>1000);
+assert.doesNotMatch(html,/hero-floating-visual|hero-video-stage/,'old competing hero animation is removed');
+console.log('cinematic media loading contract verified');
