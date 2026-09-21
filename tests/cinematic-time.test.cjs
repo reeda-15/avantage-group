@@ -6,6 +6,18 @@ test('cinematic time engine is available', () => assert.ok(fs.existsSync(file), 
 if (fs.existsSync(file)) {
   const { sample, sampleEdited, clips, createSeeker, createStallGuard } = require('../dist/cinematic-time.js');
   const lengths = [6, 7, 7, 8, 7];
+  test('timeline durations agree with the encoded media manifest', () => {
+    const edit=JSON.parse(fs.readFileSync('dist/assets/cinematic/edit.json','utf8'));
+    assert.deepEqual(clips.map(c=>Math.round((c.out-c.in)*edit.fps)),edit.frames);
+  });
+  test('48fps masters can seek the interpolated frame between source frames', () => {
+    const video = {readyState:2, duration:337/48, currentTime:0, seeking:false,
+      addEventListener(){}, removeEventListener(){}};
+    const seeker=createSeeker(video,()=>{});
+    seeker.set(1/48);
+    assert.equal(video.currentTime,1/48);
+    seeker.dispose();
+  });
   test('mastered clips begin at their matched first frame at every boundary', () => {
     const total=clips.reduce((sum,c)=>sum+c.out-c.in,0);
     const secondBoundary=(clips[0].out+clips[1].out)/total*.82;
@@ -93,7 +105,7 @@ if (fs.existsSync(file)) {
     seeker.dispose();
   });
   test('SVG handoff seeks the actual final frame instead of accepting an adjacent frame',()=>{
-    const video={readyState:2,duration:169/24,currentTime:6.99,seeking:false,addEventListener(){},removeEventListener(){}};
+    const video={readyState:2,duration:7.020833,currentTime:6.99,seeking:false,addEventListener(){},removeEventListener(){}};
     const seeker=createSeeker(video,()=>{});
     seeker.set(7);assert.equal(video.currentTime,7);
     seeker.dispose();

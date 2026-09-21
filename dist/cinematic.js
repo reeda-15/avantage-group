@@ -147,7 +147,7 @@
     scrollTrigger: {
       id: 'avantage-cinematic', trigger: hero, start: 'top top',
       end: () => `+=${Math.round(innerHeight * (innerWidth < 700 ? 9 : 11))}`,
-      pin: true, scrub: .18, invalidateOnRefresh: true, anticipatePin: 1
+      pin: true, scrub: .65, invalidateOnRefresh: true, anticipatePin: 1
     }
   });
   timeline.to(state, { progress: 1, duration: 1 }, 0)

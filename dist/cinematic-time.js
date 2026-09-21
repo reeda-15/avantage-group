@@ -1,9 +1,9 @@
 (function (root) {
   'use strict';
-  const FRAME = 1 / 24;
+  const FRAME = 1 / 48;
   const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
   // Cropped masters include their motion bridges; every next clip starts at 0.
-  const clips = [107, 128, 41, 203, 169].map(frames => ({ in: 0, out: frames / 24 }));
+  const clips = [229, 271, 97, 421, 337].map(frames => ({ in: 0, out: frames / 48 }));
   function sample(progress, durations) {
     const total = durations.reduce((sum, duration) => sum + duration, 0);
     let time = clamp(Number.isFinite(progress) ? progress : 0, 0, .82) / .82 * total;
@@ -23,7 +23,9 @@
     let direction = 0;
     let generation = 0;
     let seekGeneration = 0;
-    const wanted = () => Math.floor(clamp(target, 0, Math.max(0, video.duration - FRAME)) / FRAME + 1e-7) * FRAME;
+    // MP4 metadata rounds duration to microseconds; subtracting one frame
+    // before quantizing can otherwise discard the actual final frame.
+    const wanted = () => Math.floor(clamp(target, 0, Math.max(0, Math.round(video.duration / FRAME) - 1) * FRAME) / FRAME + 1e-7) * FRAME;
     const ready = () => !disposed && video.readyState >= 2 && !video.seeking && Math.abs(video.currentTime - wanted()) < 1e-6;
     function pump() {
       if (disposed || video.readyState < 2 || !Number.isFinite(video.duration) || video.seeking) return;

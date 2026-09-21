@@ -2,7 +2,7 @@
 .cinematic-media, .cinematic-video, .cinematic-poster, .cinematic-canvas, .cinematic-overlay, .cinematic-wash { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cinematic-video, .cinematic-poster, .cinematic-canvas { object-fit: cover; object-position: center; }
 .cinematic::before, .cinematic::after { content: ''; position: absolute; left: 0; right: 0; z-index: 2; pointer-events: none; opacity: var(--scene-shade, 1); }
-.cinematic::before { top: 0; height: 180px; background: linear-gradient(rgba(16,24,35,.66), rgba(16,24,35,0)); }
+.cinematic::before { top: 0; height: 140px; background: linear-gradient(rgba(16,24,35,.18), rgba(16,24,35,0)); }
 .cinematic::after { bottom: 0; height: 120px; background: linear-gradient(transparent, rgba(16,24,35,.42)); }
 .cinematic:not(.is-active)::before, .cinematic:not(.is-active)::after { display: none; }
 .cinematic-video { opacity: 0; }
@@ -24,12 +24,15 @@
 .cinematic.is-active .cinematic-wash { opacity: 0; }
 .cinematic-review { display: none; position: absolute; z-index: 6; top: 100px; left: 24px; max-width: 340px; padding: 10px 14px; background: #fff9e9; color: #4d3a26; font: 12px/1.5 'DM Sans',sans-serif; border: 1px solid #d4bd93; }
 .cinematic-review:not(:empty) { display: block; }
-.cinematic-page .home-header { background: transparent; backdrop-filter: none; border: 0; box-shadow: none; }
-.cinematic-page:has(.cinematic.is-active) .home-header { color: #fffaf4; }
-.cinematic-page:has(.cinematic.is-active) .home-header .brand-dot { color: inherit; }
-.cinematic-page:has(.cinematic.is-active) .home-header :is(.home-header-cta, .menu-toggle) { color: #fffaf4; border: 1px solid rgba(255,250,244,.7); background: transparent; box-shadow: none; }
-.cinematic-page:has(.cinematic.is-active) .home-header :is(.home-header-cta, .menu-toggle):hover { background: rgba(255,250,244,.14); }
-.cinematic-page:has(.cinematic.is-active) .home-header nav a:hover { box-shadow: none; text-decoration: underline; text-underline-offset: 6px; }
+.cinematic-page .home-header { top: 18px; left: 24px; right: 24px; height: 72px; padding: 0 24px; display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; color: #292d2b; background: rgba(250,247,240,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 0; border-radius: 12px; box-shadow: 0 8px 32px rgba(22,30,28,.08); }
+.cinematic-page .home-header .brand { position: static; margin: 0; font-size: 30px; justify-self: start; }
+.cinematic-page .home-header .brand-dot { color: #8a7051; }
+.cinematic-page .home-header nav { margin: 0; gap: 24px; }
+.cinematic-page .home-header nav a { font-size: 12px; font-weight: 500; }
+.cinematic-page .home-header .home-header-cta { position: static; margin: 0; justify-self: end; padding: 12px 18px; font-size: 12px; font-weight: 500; color: #faf7f0; border: 1px solid #303b36; background: #303b36; box-shadow: none; transition: background .2s; }
+.cinematic-page .home-header .home-header-cta:hover { background: #47564e; transform: none; }
+.cinematic-page .home-header .menu-toggle { color: #292d2b; border: 1px solid rgba(41,45,43,.25); background: transparent; box-shadow: none; }
+.cinematic-page .home-header nav a:hover { box-shadow: none; text-decoration: underline; text-underline-offset: 6px; }
 .cinematic-page .home-header :is(a,button):focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
 .cinematic-page .cinematic-media-strip { position: relative; inset: auto; width: 100%; margin: 0; transform: none; animation: none; mask-image: none; -webkit-mask-image: none; }
 @media (max-width: 700px) {
@@ -39,8 +42,18 @@
   .cinematic-brand p { letter-spacing: .06em; }
   .cinematic-review { top: 85px; left: 14px; right: 14px; max-width: none; }
 }
-@media (max-width: 950px) {
-  .cinematic-page:has(.cinematic.is-active) .home-header nav.is-open { color: #fffaf4; background: rgba(19,28,38,.96); border-color: rgba(255,255,255,.15); }
+@media (max-width: 1050px) {
+  .cinematic-page .home-header { grid-template-columns: 1fr auto auto; gap: 12px; }
+  .cinematic-page .home-header .menu-toggle { display: block; margin: 0; }
+  .cinematic-page .home-header nav { display: none; position: absolute; top: 80px; left: 0; right: 0; margin: 0; }
+  .cinematic-page .home-header nav.is-open { display: flex; flex-direction: column; gap: 0; padding: 14px 22px; color: #292d2b; background: #faf7f0; border: 0; border-radius: 12px; box-shadow: 0 10px 30px rgba(22,30,28,.12); }
+  .cinematic-page .home-header nav a { padding: 14px 0; font-size: 14px; }
+}
+@media (max-width: 700px) {
+  .cinematic-page .home-header { top: 12px; left: 12px; right: 12px; height: 64px; padding: 0 12px; gap: 8px; }
+  .cinematic-page .home-header .brand { font-size: 24px; }
+  .cinematic-page .home-header .home-header-cta { padding: 10px 12px; font-size: 11px; }
+  .cinematic-page .home-header .menu-toggle { padding: 9px 10px; font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cinematic { height: min(760px, 90svh); }
