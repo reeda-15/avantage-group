@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const html=fs.readFileSync('dist/index.html','utf8');
 assert.equal((html.match(/class="cinematic-connection"/g)||[]).length,4);
-assert.match(html,/viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"/,'SVG uses video coordinates and matching fit');
+assert.match(html,/viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice"/,'SVG uses the same full-screen crop as the video canvas');
 assert.match(html,/class="cinematic-orb"/);
 assert.match(html,/class="cinematic-signal"/);
 assert.match(html,/<canvas class="cinematic-canvas" width="1280" height="720"><\/canvas>/,'live phases retain the committed decoded video frame');

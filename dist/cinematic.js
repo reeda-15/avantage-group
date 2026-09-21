@@ -7,7 +7,6 @@
   if (motion.matches || navigator.connection?.saveData) return;
   gsap.registerPlugin(ScrollTrigger);
   const videos = [...hero.querySelectorAll('video')];
-  const clips = CinematicTime.clips;
   const media = hero.querySelector('.cinematic-media');
   const canvas = hero.querySelector('.cinematic-canvas');
   const context = canvas.getContext('2d', { alpha: false });
@@ -26,7 +25,6 @@
   let disposed = false;
   let timeline;
   let current = { index: 0, time: 0 };
-  let blending = false;
   let framePending = false;
   let lastFrameKey = '';
   const decoded = videos.map(() => {
@@ -65,20 +63,15 @@
   function present() {
     framePending = false;
     if (disposed || !decoded[current.index].valid) return;
-    if (blending && !seekers[current.index - 1].ready()) return;
     if (seekers[current.index].ready()) stallGuard.clear();
     // Decoder elements are never displayed. Buffered frames stay visible while
     // the next target decodes; obsolete opposite-direction frames are rejected
     // by the seeker before they can replace a buffer.
     const frame = decoded[current.index];
-    const key = `${current.index}:${frame.time}:${blending}`;
+    const key = `${current.index}:${frame.time}`;
     if (key !== lastFrameKey) {
       try {
         context.globalAlpha = 1;
-        if (blending) {
-          context.drawImage(decoded[current.index - 1].frame, 0, 0, 1280, 720);
-          context.globalAlpha = Math.min(1, frame.time / .3);
-        }
         context.drawImage(frame.frame, 0, 0, 1280, 720);
         context.globalAlpha = 1;
         lastFrameKey = key;
@@ -108,14 +101,14 @@
   const stallGuard = CinematicTime.createStallGuard(fallback);
   function watchProgress(reset = false) {
     if (disposed) return;
-    const pending = !seekers[current.index].ready() || (blending && !seekers[current.index - 1].ready());
+    const pending = !seekers[current.index].ready();
     if (reset) stallGuard.progress(pending);
     else stallGuard.check(pending);
   }
   videos.forEach((video, index) => {
     video.addEventListener('error', fallback);
     for (const event of ['loadeddata', 'seeked', 'progress']) video.addEventListener(event, () => {
-      if (index === current.index || (blending && index === current.index - 1)) watchProgress(true);
+      if (index === current.index) watchProgress(true);
     });
   });
   function update() {
@@ -123,22 +116,20 @@
     const next = CinematicTime.sampleEdited(state.progress);
     if (next.index !== current.index) decoded[next.index].valid = false;
     current = next;
-    // Only cloud-to-cloud footage is dissolved. Robot handoffs use trimmed
-    // single-image cuts so the viewer never sees two robot sizes at once.
-    blending = current.index === 4 && current.time < .3;
+    // Matched crops and motion bridges are encoded into the media. Each join
+    // ends on the next clip's first image, including when scrolling backward.
     if (state.progress < .82) gsap.set(overlay, { visibility: 'hidden' });
     load(current.index);
     load(current.index + 1);
     load(current.index - 1);
     seekers[current.index].set(current.time);
-    if (blending) seekers[current.index - 1].set(clips[current.index - 1].out - 1 / 24);
     brand.inert = state.progress < .994;
-    controls.style.color = state.progress > .96 || innerWidth < 700 ? '#272923' : '#fffaf4';
-    controls.style.textShadow = state.progress > .96 || innerWidth < 700 ? 'none' : '';
+    controls.style.color = state.progress > .96 ? '#272923' : '#fffaf4';
+    controls.style.textShadow = state.progress > .96 ? 'none' : '';
     if (isReview) {
       review.textContent = state.progress >= .82
         ? `Phase ${state.progress < .92 ? '6 · Connections' : state.progress < .97 ? '7 · Signal' : '8 · Brand'} — live SVG / HTML`
-        : `Phase ${current.index + 1} · ${phaseNames[current.index]}${blending ? ' · Cloud transition' : ' · Repeated motion trimmed; original source framing still differs.'}`;
+        : `Phase ${current.index + 1} · ${phaseNames[current.index]} · Matched framing`;
     }
     watchProgress();
     schedulePresent();
@@ -168,6 +159,7 @@
     .to(signal, { scaleX: 1, opacity: 1, duration: .032 }, .932)
     .to(orb, { scale: .1, opacity: 0, duration: .016 }, .951)
     .to(wash, { opacity: 1, duration: .032 }, .955)
+    .to(hero, { '--scene-shade': 0, duration: .032 }, .955)
     .to(signal, { opacity: 0, duration: .012 }, .966)
     .to(brand, { autoAlpha: 1, duration: .004 }, .973)
     .to(brand.children, { y: 0, opacity: 1, duration: .01, stagger: .004 }, .974)

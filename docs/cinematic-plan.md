@@ -28,3 +28,6 @@ Four additional regression checks cover source trims, presentation during uninte
 
 ## Review conditions
 Rapid scroll reversal must converge to the latest target, not stale seek completions. SVG overlays must wait for the final video frame to be presented. Hidden CTAs must be unfocusable. Reduced motion must avoid pinning and video downloads. A media failure must release the pin and preserve navigation and CTA access. Existing sections must remain unchanged.
+
+## Follow-up: matched framing and transparent navigation
+The user authorized cropping and enlargement to improve continuity. Re-mastered sources replace the earlier runtime source windows: landscape crops are registered, robot visor size/position is matched, repeated reveal footage is trimmed and ten-frame optical-flow bridges connect all four boundaries. Runtime maps the new full clip durations, with no additional crossfade. Full-screen cover and matching SVG slice replace letterboxing; navigation is transparent with readable foreground text. See cinematic-assets.md and assets/cinematic/edit.json for the current edit and verification record; earlier notes above describe superseded versions.

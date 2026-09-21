@@ -2,14 +2,8 @@
   'use strict';
   const FRAME = 1 / 24;
   const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
-  // Remove repeated reveal/rise footage instead of dissolving two robot poses.
-  const clips = [
-    { in: 0, out: 145 / 24 },
-    { in: 0, out: 5.25 },
-    { in: 4.75, out: 169 / 24 },
-    { in: 2.5, out: 193 / 24 },
-    { in: 0, out: 169 / 24 }
-  ];
+  // Cropped masters include their motion bridges; every next clip starts at 0.
+  const clips = [107, 128, 41, 203, 169].map(frames => ({ in: 0, out: frames / 24 }));
   function sample(progress, durations) {
     const total = durations.reduce((sum, duration) => sum + duration, 0);
     let time = clamp(Number.isFinite(progress) ? progress : 0, 0, .82) / .82 * total;

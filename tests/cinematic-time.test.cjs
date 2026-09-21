@@ -6,14 +6,14 @@ test('cinematic time engine is available', () => assert.ok(fs.existsSync(file), 
 if (fs.existsSync(file)) {
   const { sample, sampleEdited, clips, createSeeker, createStallGuard } = require('../dist/cinematic-time.js');
   const lengths = [6, 7, 7, 8, 7];
-  test('edited boundaries skip the duplicated robot reveal and approach', () => {
+  test('mastered clips begin at their matched first frame at every boundary', () => {
     const total=clips.reduce((sum,c)=>sum+c.out-c.in,0);
     const secondBoundary=(clips[0].out+clips[1].out)/total*.82;
     const thirdBoundary=(clips[0].out+clips[1].out+clips[2].out-clips[2].in)/total*.82;
     assert.equal(sampleEdited(secondBoundary+.00001).index,2);
-    assert.ok(sampleEdited(secondBoundary+.00001).time>=4.75);
+    assert.ok(sampleEdited(secondBoundary+.00001).time<1/24);
     assert.equal(sampleEdited(thirdBoundary+.00001).index,3);
-    assert.ok(sampleEdited(thirdBoundary+.00001).time>=2.5);
+    assert.ok(sampleEdited(thirdBoundary+.00001).time<1/24);
     assert.equal(sampleEdited(secondBoundary-.00001).index,1);
     assert.equal(sampleEdited(1).time,7,'SVG holds the original final decoded frame');
   });
