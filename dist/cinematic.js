@@ -7,7 +7,7 @@
   if (motion.matches || navigator.connection?.saveData) return;
   gsap.registerPlugin(ScrollTrigger);
   const videos = [...hero.querySelectorAll('video')];
-  const durations = [145, 169, 169, 193, 169].map(frames => frames / 24);
+  const clips = CinematicTime.clips;
   const media = hero.querySelector('.cinematic-media');
   const canvas = hero.querySelector('.cinematic-canvas');
   const context = canvas.getContext('2d', { alpha: false });
@@ -29,6 +29,11 @@
   let blending = false;
   let framePending = false;
   let lastFrameKey = '';
+  const decoded = videos.map(() => {
+    const frame = document.createElement('canvas');
+    frame.width = 1280; frame.height = 720;
+    return { frame, context: frame.getContext('2d', { alpha: false }), time: 0, valid: false };
+  });
   const loaded = new Set();
   const phaseNames = ['The world', 'Something appears', 'Rising together', 'The passage', 'The agents'];
 
@@ -55,25 +60,26 @@
     videos[index].load();
   }
 
-  // Keep the previous displayed frame until all layers for the latest target
-  // have finished seeking. Late seek completions cannot flash stale clips.
+  // Present completed buffered frames while scrolling continues. Buffers are
+  // copied synchronously on seek completion, before the next seek starts.
   function present() {
     framePending = false;
-    if (disposed || !seekers[current.index].ready()) return;
+    if (disposed || !decoded[current.index].valid) return;
     if (blending && !seekers[current.index - 1].ready()) return;
-    stallGuard.clear();
-    // Decoder elements are never displayed. Commit a frame only after the
-    // latest requested seek is ready, preserving the previous canvas otherwise.
-    // This prevents an obsolete intermediate seek from flashing on reversal.
-    const key = `${current.index}:${current.time}`;
+    if (seekers[current.index].ready()) stallGuard.clear();
+    // Decoder elements are never displayed. Buffered frames stay visible while
+    // the next target decodes; obsolete opposite-direction frames are rejected
+    // by the seeker before they can replace a buffer.
+    const frame = decoded[current.index];
+    const key = `${current.index}:${frame.time}:${blending}`;
     if (key !== lastFrameKey) {
       try {
         context.globalAlpha = 1;
         if (blending) {
-          context.drawImage(videos[current.index - 1], 0, 0, 1280, 720);
-          context.globalAlpha = current.time / .3;
+          context.drawImage(decoded[current.index - 1].frame, 0, 0, 1280, 720);
+          context.globalAlpha = Math.min(1, frame.time / .3);
         }
-        context.drawImage(videos[current.index], 0, 0, 1280, 720);
+        context.drawImage(frame.frame, 0, 0, 1280, 720);
         context.globalAlpha = 1;
         lastFrameKey = key;
       } catch { fallback(); return; }
@@ -81,7 +87,7 @@
     canvas.style.visibility = 'visible';
     // The canvas holds the actual decoded Phase 5 final frame throughout SVG
     // and HTML phases, without substituting a differently compressed still.
-    const live = state.progress >= .82;
+    const live = state.progress >= .82 && seekers[4].ready();
     gsap.set(overlay, { visibility: live ? 'visible' : 'hidden' });
   }
   function schedulePresent() {
@@ -90,7 +96,15 @@
       requestAnimationFrame(present);
     }
   }
-  const seekers = videos.map(video => CinematicTime.createSeeker(video, schedulePresent));
+  const seekers = videos.map((video, index) => CinematicTime.createSeeker(video, schedulePresent, time => {
+    if (disposed || !decoded[index].context) return;
+    try {
+      decoded[index].context.drawImage(video, 0, 0, 1280, 720);
+      decoded[index].time = time;
+      decoded[index].valid = true;
+      schedulePresent();
+    } catch { fallback(); }
+  }));
   const stallGuard = CinematicTime.createStallGuard(fallback);
   function watchProgress(reset = false) {
     if (disposed) return;
@@ -106,21 +120,25 @@
   });
   function update() {
     if (disposed) return;
-    current = CinematicTime.sample(state.progress, durations);
-    blending = current.index > 0 && current.time < .3;
+    const next = CinematicTime.sampleEdited(state.progress);
+    if (next.index !== current.index) decoded[next.index].valid = false;
+    current = next;
+    // Only cloud-to-cloud footage is dissolved. Robot handoffs use trimmed
+    // single-image cuts so the viewer never sees two robot sizes at once.
+    blending = current.index === 4 && current.time < .3;
     if (state.progress < .82) gsap.set(overlay, { visibility: 'hidden' });
     load(current.index);
     load(current.index + 1);
     load(current.index - 1);
     seekers[current.index].set(current.time);
-    if (blending) seekers[current.index - 1].set(durations[current.index - 1]);
+    if (blending) seekers[current.index - 1].set(clips[current.index - 1].out - 1 / 24);
     brand.inert = state.progress < .994;
     controls.style.color = state.progress > .96 || innerWidth < 700 ? '#272923' : '#fffaf4';
     controls.style.textShadow = state.progress > .96 || innerWidth < 700 ? 'none' : '';
     if (isReview) {
       review.textContent = state.progress >= .82
         ? `Phase ${state.progress < .92 ? '6 · Connections' : state.progress < .97 ? '7 · Signal' : '8 · Brand'} — live SVG / HTML`
-        : `Phase ${current.index + 1} · ${phaseNames[current.index]}${blending ? ' · SOURCE HANDOFF: 0.3s dissolve; matching source frames still needed.' : ' · Source continuity requires corrected clips at all four boundaries.'}`;
+        : `Phase ${current.index + 1} · ${phaseNames[current.index]}${blending ? ' · Cloud transition' : ' · Repeated motion trimmed; original source framing still differs.'}`;
     }
     watchProgress();
     schedulePresent();
@@ -138,7 +156,7 @@
     scrollTrigger: {
       id: 'avantage-cinematic', trigger: hero, start: 'top top',
       end: () => `+=${Math.round(innerHeight * (innerWidth < 700 ? 9 : 11))}`,
-      pin: true, scrub: true, invalidateOnRefresh: true, anticipatePin: 1
+      pin: true, scrub: .18, invalidateOnRefresh: true, anticipatePin: 1
     }
   });
   timeline.to(state, { progress: 1, duration: 1 }, 0)

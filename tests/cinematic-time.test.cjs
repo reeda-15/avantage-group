@@ -4,8 +4,19 @@ const fs = require('node:fs');
 const file = 'dist/cinematic-time.js';
 test('cinematic time engine is available', () => assert.ok(fs.existsSync(file), 'missing cinematic time engine'));
 if (fs.existsSync(file)) {
-  const { sample, createSeeker, createStallGuard } = require('../dist/cinematic-time.js');
+  const { sample, sampleEdited, clips, createSeeker, createStallGuard } = require('../dist/cinematic-time.js');
   const lengths = [6, 7, 7, 8, 7];
+  test('edited boundaries skip the duplicated robot reveal and approach', () => {
+    const total=clips.reduce((sum,c)=>sum+c.out-c.in,0);
+    const secondBoundary=(clips[0].out+clips[1].out)/total*.82;
+    const thirdBoundary=(clips[0].out+clips[1].out+clips[2].out-clips[2].in)/total*.82;
+    assert.equal(sampleEdited(secondBoundary+.00001).index,2);
+    assert.ok(sampleEdited(secondBoundary+.00001).time>=4.75);
+    assert.equal(sampleEdited(thirdBoundary+.00001).index,3);
+    assert.ok(sampleEdited(thirdBoundary+.00001).time>=2.5);
+    assert.equal(sampleEdited(secondBoundary-.00001).index,1);
+    assert.equal(sampleEdited(1).time,7,'SVG holds the original final decoded frame');
+  });
   test('phase boundaries and reverse scrubbing are history independent', () => {
     const boundary = 6 / 35 * .82;
     assert.equal(sample(boundary - .00001, lengths).index, 0);
@@ -52,6 +63,39 @@ if (fs.existsSync(file)) {
     assert.equal(video.currentTime, 0);
     video.readyState = 2; video.duration = 7; listeners.loadeddata();
     assert.ok(video.currentTime > 6.9 && video.currentTime < 7);
+    seeker.dispose();
+  });
+  test('continuous scrolling presents completed frames without waiting for scrolling to stop', () => {
+    const events = {}; let time = 0;
+    const video = {readyState:2,duration:7,seeking:false,
+      addEventListener:(n,cb)=>events[n]=cb, removeEventListener:n=>delete events[n],
+      get currentTime(){return time;}, set currentTime(v){time=v;this.seeking=true;}};
+    const frames=[];
+    const seeker=createSeeker(video,()=>{},t=>frames.push(t));
+    const finish=()=>{video.seeking=false;events.seeked();};
+    seeker.set(1); seeker.set(2); finish();
+    assert.deepEqual(frames,[1], 'completed intermediate frames must be committed while the next seek is pending');
+    seeker.set(3); finish();
+    assert.deepEqual(frames,[1,2]);
+    seeker.set(.5); finish();
+    assert.deepEqual(frames,[1,2], 'obsolete forward frame must not flash after a reversal');
+    finish(); assert.deepEqual(frames,[1,2,.5]);
+    seeker.dispose();
+  });
+  test('small smooth reverse updates invalidate an outstanding forward seek',()=>{
+    const events={};let time=0;const frames=[];
+    const video={readyState:2,duration:7,seeking:false,addEventListener:(n,cb)=>events[n]=cb,removeEventListener:n=>delete events[n],get currentTime(){return time;},set currentTime(t){time=t;this.seeking=true;}};
+    const seeker=createSeeker(video,()=>{},t=>frames.push(t));
+    seeker.set(1);seeker.set(2);
+    for(let n=1;n<=40;n++)seeker.set(2-n*.005);
+    video.seeking=false;events.seeked();
+    assert.deepEqual(frames,[],'small reverse steps must invalidate the forward frame');
+    seeker.dispose();
+  });
+  test('SVG handoff seeks the actual final frame instead of accepting an adjacent frame',()=>{
+    const video={readyState:2,duration:169/24,currentTime:6.99,seeking:false,addEventListener(){},removeEventListener(){}};
+    const seeker=createSeeker(video,()=>{});
+    seeker.set(7);assert.equal(video.currentTime,7);
     seeker.dispose();
   });
   test('decoder progress prevents fallback during a long scrub, but a genuine stall fails', t => {

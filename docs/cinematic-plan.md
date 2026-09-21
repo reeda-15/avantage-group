@@ -21,5 +21,10 @@ Ten automated checks pass, including a 50-second simulated continuous scrub with
 
 User chose both softened handoffs and explicit flags: the preview uses reversible 0.3-second dissolves and optional `?cinematic-review=1` notes. No framework migration, additional generated video, or unrelated page redesign.
 
+## Follow-up: screen recording fix
+The supplied 9.37-second recording exposed double-exposed/shrinking robots at the Phase 3 → 4 boundary and stop-start seeking. Exact-latest-target presentation starved during continuous scrolling. The renderer now copies every completed same-direction frame into a separate canvas before starting another seek; obsolete reversed seeks are rejected. Source windows trim the repeated reveal/rise and robot dissolves are removed; only clouds crossfade. A 0.18-second ScrollTrigger catch-up softens wheel steps without autoplay.
+
+Four additional regression checks cover source trims, presentation during uninterrupted scrolling, tiny reverse increments, and exact endpoint seeking. All 14 tests pass. A browser fixture simulates eight seconds of uninterrupted forward and reverse scrolling and verifies that frames are rendered throughout, all videos remain paused, and the cinematic stays active. Source camera compositions still differ at cuts; this update does not claim to regenerate or exactly match the footage.
+
 ## Review conditions
 Rapid scroll reversal must converge to the latest target, not stale seek completions. SVG overlays must wait for the final video frame to be presented. Hidden CTAs must be unfocusable. Reduced motion must avoid pinning and video downloads. A media failure must release the pin and preserve navigation and CTA access. Existing sections must remain unchanged.
