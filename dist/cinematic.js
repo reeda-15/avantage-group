@@ -148,7 +148,9 @@
     scrollTrigger: {
       id: 'avantage-cinematic', trigger: hero, start: 'top top',
       end: () => `+=${Math.round(innerHeight * (innerWidth < 700 ? 9 : 11))}`,
-      pin: true, scrub: .65, invalidateOnRefresh: true, anticipatePin: 1
+      // Page scrolling supplies the main easing. Avoid a second long catch-up.
+      pin: true, scrub: window.AvantageScroll?.active ? .12 : .65,
+      invalidateOnRefresh: true, anticipatePin: 1
     }
   });
   timeline.to(state, { progress: 1, duration: 1 }, 0)
@@ -171,7 +173,8 @@
     event.preventDefault();
     const target = document.getElementById('after-cinematic');
     const offset = target.getBoundingClientRect().top + scrollY;
-    window.scrollTo({ top: offset, behavior: 'instant' });
+    if (window.AvantageScroll) window.AvantageScroll.scrollTo(offset, { immediate: true });
+    else window.scrollTo({ top: offset, behavior: 'instant' });
     target.focus({ preventScroll: true });
   });
   motion.addEventListener('change', event => { if (event.matches) fallback(); });
