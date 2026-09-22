@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avantage AI — Your business. Running smarter.</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;background:#14171b;color:#f4f1eb;font-family:Arial,sans-serif}a{color:inherit;text-decoration:none}a:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:6px}
+    .stage{position:relative;height:100svh;overflow:hidden;background:#14171b url('assets/cinematic-v2/poster-hd.jpg') center/cover}.stage video,.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.stage video{opacity:0;pointer-events:none}.stage canvas{visibility:hidden}.stage .cinematic-stars{visibility:visible;pointer-events:none}
+    header{position:absolute;top:0;left:0;right:0;padding:24px 4vw;display:flex;justify-content:space-between;gap:20px;align-items:center;text-shadow:0 1px 12px #000}header strong{font-family:Georgia,serif;font-size:23px;font-weight:400}header a{font-size:12px}
+    .controls{position:absolute;bottom:0;left:0;right:0;padding:35px 4vw 22px;background:linear-gradient(transparent,#14171bcc);display:grid;gap:12px}.labels{display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.03em}input{width:100%;accent-color:#ece5d9;cursor:pointer}footer{padding:50px 4vw;text-align:center;font-size:14px}footer a{text-decoration:underline}#notice{font-size:12px;margin:0;color:#dfd9ce}
+    @media(max-width:600px){header{padding:20px}header strong{font-size:20px}.controls{padding:28px 20px 20px}.labels{font-size:11px}}
+  </style>
+  <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=6">
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-preview.js?v=9"></script>
+</head>
+<body>
+  <main>
+    <section class="stage" data-cinematic aria-label="Avantage cinematic video preview">
+      <video id="journey" muted playsinline preload="auto" poster="assets/cinematic-v2/poster-hd.jpg" aria-label="Mountain, robot project gallery, architecture and galaxy" src="assets/cinematic-v2/avantage-journey-1080p.mp4"></video>
+      <canvas id="picture" width="1920" height="1080" aria-hidden="true"></canvas>
+      <header><button class="brand-home" data-jump="intro" aria-label="Back to the beginning"><strong>Avantage. AI</strong></button><nav aria-label="Main navigation"><button data-jump="project-0">Our work</button><button class="strategy-link" data-jump="callback">Book a free strategy call ↗</button></nav></header>
+      <div class="controls"><div class="labels"><span id="instruction">Scroll to explore · reverse to return</span><span id="chapter-label"></span><output id="time" aria-hidden="true"></output></div><input id="position" type="range" min="0" max="1000" value="0" aria-label="Story position"><p id="notice" role="status">Loading the cinematic preview…</p></div>
+    </section>
+  </main>
+  <section class="brief-section callback-section" id="callback" aria-labelledby="callback-title" tabindex="-1">
+    <div class="brief-grid">
+      <div class="brief-heading"><p class="brief-label">BOOK A FREE STRATEGY CALL</p><h2 id="callback-title">Talk to the people<br><em>building your system.</em></h2><p class="callback-intro">Tell us where you want to take your business. Let’s find the right place to start.</p></div>
+      <form class="brief-form callback-form" id="callback-form" onsubmit="return false">
+        <p class="brief-label">RECEIVE A CALL WITHIN 24 HR</p>
+        <div class="brief-field"><label for="callback-phone">PHONE NUMBER</label><input id="callback-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" placeholder="+91 98765 43210"></div>
+        <div class="brief-field"><label for="callback-name">YOUR NAME <span>(OPTIONAL)</span></label><input id="callback-name" name="name" autocomplete="name" maxlength="120" placeholder="Optional"></div>
+        <div class="brief-field"><label for="callback-company">BUSINESS NAME <span>(OPTIONAL)</span></label><input id="callback-company" name="company" autocomplete="organization" maxlength="160" placeholder="Optional"></div>
+        <button class="brief-submit" type="submit" disabled aria-describedby="callback-status">Request callback <span aria-hidden="true">↗</span></button>
+        <p id="callback-status" class="brief-status" role="status">Online callback requests will be available soon.</p>
+      </form>
+    </div>
+  </section>
+  <section class="brief-section" id="brief" aria-labelledby="brief-title" tabindex="-1">
+    <div class="brief-heading"><p class="brief-label">YOUR NEXT CHAPTER</p><h2 id="brief-title">Let’s build your <em>advantage.</em></h2></div>
+    <div class="brief-grid">
+      <aside class="brief-details" aria-label="Contact details">
+        <div><p class="brief-label">EMAIL</p><p class="brief-contact">contact@avantageai.com</p></div>
+        <div><p class="brief-label">PHONE</p><p class="brief-contact">+91 92708 56871</p></div>
+        <div><p class="brief-label">STUDIO</p><p>Sumit Apartments, 493<br>Professor’s Colony, Hanuman Nagar<br>Nagpur, Maharashtra 440024</p></div>
+        <p class="brief-note">Tell us what’s slowing you down.<br>We’ll start with what matters to your business.</p>
+      </aside>
+      <form class="brief-form" id="brief-form" onsubmit="return false">
+        <div class="brief-field"><label for="brief-name">YOUR NAME</label><input id="brief-name" name="name" autocomplete="name" required maxlength="120"></div>
+        <div class="brief-field"><label for="brief-email">EMAIL</label><input id="brief-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
+        <div class="brief-field"><label for="brief-company">COMPANY / BUSINESS <span>(OPTIONAL)</span></label><input id="brief-company" name="company" autocomplete="organization" maxlength="160"></div>
+        <fieldset class="brief-services"><legend>I’M INTERESTED IN</legend>
+          <label><input type="checkbox" name="services" value="Task Automation"><span>Task Automation</span></label>
+          <label><input type="checkbox" name="services" value="Custom Software"><span>Custom Software</span></label>
+          <label><input type="checkbox" name="services" value="Web/App Development"><span>Web/App Development</span></label>
+          <label><input type="checkbox" name="services" value="Marketing Automation"><span>Marketing Automation</span></label>
+          <label><input type="checkbox" name="services" value="E-Commerce"><span>E-Commerce</span></label>
+          <label><input type="checkbox" name="services" value="The Impossible"><span>The Impossible</span></label>
+        </fieldset>
+        <div class="brief-field brief-message"><label for="brief-message">TELL US MORE</label><textarea id="brief-message" name="message" rows="4" required maxlength="5000" placeholder="What’s the problem you’re trying to remove?"></textarea></div>
+        <button class="brief-submit" type="submit" disabled aria-describedby="brief-status">Send the brief <span aria-hidden="true">↗</span></button>
+        <p id="brief-status" class="brief-status" role="status">Brief submissions will be available soon.</p>
+      </form>
+    </div>
+  </section>
+  <footer class="story-footer" id="footer"><strong>Avantage. AI</strong><p>Practical systems. A better way to work.</p></footer><noscript><p>Avantage AI — AI automation, custom software, websites and apps. Contact: contact@avantageai.com.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "sourceResolution": [
+    1280,
+    720
+  ],
+  "outputResolution": [
+    1920,
+    1080
+  ],
+  "native1080p": false,
+  "sourceFps": 24,
+  "outputFps": 48,
+  "editedSourceFrames": 757,
+  "chapter3TrimFrames": 66,
+  "chapter3TrimSeconds": 2.75,
+  "joinBlendSourceFrames": 10,
+  "chapter3ExtraCrop": 1.08,
+  "commonEdgeCrop": 1.065,
+  "scaling": "Lanczos, restrained luma sharpening",
+  "encoding": "H.264 CRF 16, all intra, no B frames, faststart",
+  "sourceGenerationIds": [
+    "b4b916a7-5c05-421b-a2c5-87c51c8b8df9",
+    "f047b4ea-c418-4584-8443-e0c5689ab247",
+    "561e17a3-9041-408f-b9b8-76539280676f"
+  ],
+  "outputFrames": 1511,
+  "outputDurationSeconds": 31.479166666666668,
+  "bytes": 106736017
+}
