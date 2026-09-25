@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "dist",
+  "routes": [
+    { "src": "^/$", "dest": "/cinematic-preview.html" },
+    { "handle": "filesystem" }
+  ]
+}
