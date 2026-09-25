@@ -52,7 +52,7 @@
     if (!motion.matches && window.gsap && window.ScrollTrigger) {
       gsap.registerPlugin(ScrollTrigger);
       document.querySelector('#instruction').textContent = 'Explore the story';
-      timeline = gsap.timeline({onUpdate:render,scrollTrigger:{trigger:'.stage',start:'top top',end:()=>`+=${Math.max(innerHeight,700) * 28 * CinematicStory.total / 21.7}`,pin:true,scrub:window.AvantageScroll?.active ? .15 : .65,invalidateOnRefresh:true}});
+      timeline = gsap.timeline({onUpdate:render,scrollTrigger:{trigger:'.stage',start:'top top',end:()=>`+=${Math.max(innerHeight,700) * 28 * CinematicStory.total / 21.7}`,pin:true,scrub:mobile.matches ? .08 : window.AvantageScroll?.active ? .15 : .65,invalidateOnRefresh:true}});
       timeline.fromTo(state,{progress:0},{progress:1,duration:1,ease:'none'});
     } else document.querySelector('#instruction').textContent = 'Explore the story';
     render();

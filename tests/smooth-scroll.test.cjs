@@ -22,7 +22,8 @@ function setup(reduced=false) {
 test('one GSAP clock drives smooth scrolling and immediate jumps cancel momentum',()=>{
   const s=setup();assert.equal(s.ticks.size,1);
   [...s.ticks][0](2);assert.equal(s.instances[0].time,2000);
-  assert.equal(s.instances[0].options.syncTouch,false);
+  assert.equal(s.instances[0].options.syncTouch,true);
+  assert.equal(s.instances[0].options.touchMultiplier,.8);
   s.window.AvantageScroll.scrollTo(500,{immediate:true});
   assert.equal(s.instances[0].target,500);assert.equal(s.instances[0].immediate,true);
   s.events.pagehide();assert.equal(s.ticks.size,0);assert.equal(s.instances[0].destroyed,true);

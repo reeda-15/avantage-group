@@ -10,8 +10,8 @@
     if (lenis || motion.matches || !gsap || !ScrollTrigger || !Lenis) return;
     gsap.registerPlugin(ScrollTrigger);
     lenis = new Lenis({
-      autoRaf: false, lerp: .1, smoothWheel: true, wheelMultiplier: .9,
-      syncTouch: false, anchors: true, allowNestedScroll: true
+      autoRaf: false, lerp: .085, smoothWheel: true, wheelMultiplier: .9,
+      syncTouch: true, touchMultiplier: .8, anchors: true, allowNestedScroll: true
     });
     lenis.on('scroll', ScrollTrigger.update);
     ScrollTrigger.addEventListener('refresh', resize);
