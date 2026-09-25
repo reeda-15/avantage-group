@@ -5,6 +5,7 @@
   const time = document.querySelector('#time');
   const notice = document.querySelector('#notice');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile = matchMedia('(max-width: 800px)');
   const state = { progress: 0 };
   const canvas = document.querySelector('#picture');
   const context = canvas.getContext('2d', {alpha:false});
@@ -21,7 +22,10 @@
     presented = frameTime;
     stars?.update(frameTime);
     billboards?.update(frameTime);
-    if (context) {
+    if (mobile.matches) {
+      canvas.style.visibility = 'hidden';
+      video.style.opacity = '1';
+    } else if (context) {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
       canvas.style.visibility = 'visible';
     } else video.style.opacity = '1';
@@ -54,6 +58,15 @@
     render();
   }
   function decoded() { clearTimeout(stallTimer); stallTimer = undefined; pump(); }
+  let primed = false;
+  function pauseAutoplay() {
+    video.pause(); primed = true; pump();
+  }
+  function primeMobileVideo() {
+    if (!mobile.matches || primed || video.readyState < 1) return;
+    const attempt = video.play();
+    if (attempt?.catch) attempt.catch(() => {});
+  }
   function move() {
     const progress = Number(slider.value) / 1000;
     if (timeline) {
@@ -88,7 +101,9 @@
   video.addEventListener('loadedmetadata', configure, {once:true});
   video.addEventListener('loadeddata', decoded);
   video.addEventListener('seeked', decoded);
+  video.addEventListener('playing', pauseAutoplay);
   video.addEventListener('error', error);
+  addEventListener('touchstart', primeMobileVideo, {passive:true});
   // Cached local media can finish metadata loading before deferred scripts run.
   if (video.readyState >= 1) {
     video.removeEventListener('loadedmetadata', configure);
@@ -107,8 +122,9 @@
     motion.removeEventListener('change', configure);
     slider.removeEventListener('input', move);
     slider.removeEventListener('pointerdown', beginDrag);
+    removeEventListener('touchstart', primeMobileVideo);
     removeEventListener('pointerup', endDrag);
     removeEventListener('pointercancel', endDrag);
-    video.removeEventListener('loadeddata', decoded); video.removeEventListener('seeked', decoded);
+    video.removeEventListener('loadeddata', decoded); video.removeEventListener('seeked', decoded); video.removeEventListener('playing', pauseAutoplay);
   });
 })();
