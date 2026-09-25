@@ -30,3 +30,11 @@ test('mobile scroll uses synchronized touch and a tighter scrub', () => {
   assert.match(smooth, /touchMultiplier:\s*\.8/);
   assert.match(preview, /mobile\.matches\s*\?\s*\.08\s*:/);
 });
+
+test('forward mobile scrubbing keeps native playback moving between scroll updates', () => {
+  const preview = fs.readFileSync('dist/cinematic-preview.js', 'utf8');
+  assert.match(preview, /function continueMobilePlayback\(/);
+  assert.match(preview, /video\.playbackRate\s*=/);
+  assert.match(preview, /mobileSettleTimer\s*=\s*setTimeout/);
+  assert.match(preview, /video\.pause\(\);\s*seeker\.set\(target\)/);
+});

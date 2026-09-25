@@ -11,7 +11,7 @@
   const context = canvas.getContext('2d', {alpha:false});
   const stars = window.createCinematicStars?.(document.querySelector('.stage'));
   const billboards = window.createCinematicBillboards?.(document.querySelector('.stage'));
-  let timeline, target = 0, disposed = false, stallTimer, dragging = false, presented = -1;
+  let timeline, target = 0, disposed = false, stallTimer, mobileSettleTimer, dragging = false, presented = -1, scrollPlayback = false;
   const content = window.createCinematicContent?.(document.querySelector('.stage'), jump);
   const maximum = () => Math.max(0, (Math.round(video.duration * 48) - 1) / 48);
   const seeker = CinematicTime.createSeeker(video, () => {
@@ -32,13 +32,34 @@
   });
   function pump() {
     if (disposed || !Number.isFinite(video.duration)) return;
-    seeker.set(Math.min(maximum(), target));
+    if (mobile.matches && !motion.matches) continueMobilePlayback();
+    else seeker.set(Math.min(maximum(), target));
+  }
+  function continueMobilePlayback() {
+    const delta = target - video.currentTime;
+    clearTimeout(mobileSettleTimer);
+    if (Math.abs(delta) < 1 / 48) return;
+    if (delta < 0) {
+      scrollPlayback = false;
+      video.pause();
+      seeker.set(target);
+      return;
+    }
+    scrollPlayback = true;
+    video.playbackRate = Math.min(4, Math.max(.75, delta * 4));
+    const attempt = video.play();
+    if (attempt?.catch) attempt.catch(() => {});
+    mobileSettleTimer = setTimeout(() => {
+      scrollPlayback = false;
+      video.pause(); seeker.set(target);
+    }, 240);
   }
   function render() {
     content?.update(state.progress);
     if (!dragging) slider.value = String(Math.round(state.progress * 1000));
     if (!Number.isFinite(video.duration)) return;
     target = Math.min(maximum(), CinematicStory.sample(state.progress).time);
+    if (mobile.matches) { stars?.update(target); billboards?.update(target); }
     time.textContent = `${target.toFixed(1)} / ${video.duration.toFixed(1)} s`;
     if (!stallTimer) stallTimer = setTimeout(() => { notice.textContent = 'Loading the next scene…'; stallTimer = undefined; }, 8000);
     pump();
@@ -60,6 +81,7 @@
   function decoded() { clearTimeout(stallTimer); stallTimer = undefined; pump(); }
   let primed = false;
   function pauseAutoplay() {
+    if (scrollPlayback) return;
     video.pause(); primed = true; pump();
   }
   function primeMobileVideo() {
@@ -115,7 +137,7 @@
   addEventListener('pointercancel', endDrag);
   motion.addEventListener('change', configure);
   addEventListener('pagehide', event => {
-    video.pause(); clearTimeout(stallTimer);
+    video.pause(); clearTimeout(stallTimer); clearTimeout(mobileSettleTimer);
     if (event.persisted) return;
     disposed = true; seeker.dispose(); stars?.dispose(); billboards?.dispose(); content?.dispose(); timeline?.scrollTrigger?.kill(); timeline?.kill();
     document.querySelector('header').removeEventListener('click',navigation);
