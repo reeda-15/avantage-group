@@ -11,7 +11,7 @@
     @media(max-width:600px){header{padding:20px}header strong{font-size:20px}.controls{padding:28px 20px 20px}.labels{font-size:11px}}
   </style>
   <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7"><link rel="stylesheet" href="connected-systems.css"><link rel="stylesheet" href="cinematic-scenes.css">
-  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script>
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script>
 </head>
 <body>
 
@@ -26,6 +26,17 @@
     </section>
   <main class="connected-systems-main" aria-label="The Connected Systems Edition">
     <div class="chapter-transition" data-scene="intro" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
+    <nav class="edition-navigation" data-chapter-nav aria-label="Edition chapters">
+      <div class="edition-navigation-row" data-lenis-prevent>
+        <a href="#system-overview">Overview</a>
+        <a href="#ai-agents">AI Agents</a>
+        <a href="#automations">Automations</a>
+        <a href="#custom-software">Custom Software</a>
+        <a href="#data-insights">Data &amp; Insights</a>
+        <a href="#creative-ai">Creative AI</a>
+        <a href="#our-work">Our Work</a>
+      </div>
+    </nav>
     <section class="edition-chapter edition-overview" id="system-overview" aria-labelledby="system-overview-title" tabindex="-1">
       <div class="systems-container">
         <p class="edition-marker">Systems 2026</p>

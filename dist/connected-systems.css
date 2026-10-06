@@ -40,6 +40,34 @@
 .systems-action { background: var(--systems-signal); color: var(--systems-bg); border-radius: var(--systems-card-radius); }
 .systems-text-action { text-decoration: underline; text-underline-offset: .35em; }
 .connected-systems-main :focus-visible { outline: var(--systems-focus-width) solid var(--systems-signal); outline-offset: var(--systems-focus-offset); }
+.edition-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  max-width: 100%;
+  border-block: 1px solid var(--systems-line);
+  background: var(--systems-bg);
+}
+.edition-navigation-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.25rem, 1vw, 1rem);
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding: .75rem 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--systems-signal) var(--systems-bg);
+}
+.edition-navigation a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: .65rem .75rem; color: var(--systems-muted); font-size: .875rem; white-space: nowrap; border-radius: .25rem; }
+.edition-navigation a:hover, .edition-navigation a[aria-current="location"] { color: var(--systems-signal); background: #d5f9700d; }
+.edition-navigation a:focus-visible { outline-offset: 2px; }
+@media (max-width: 1000px) {
+  .edition-navigation-row { justify-content: flex-start; }
+}
 @media (max-width: 700px) {
   .connected-systems-main { --systems-gutter: 1.5rem; --systems-space-lg: 3.5rem; --systems-space-md: 2rem; --systems-anchor-offset: 5rem; }
   .edition-chapter h2 { max-width: 100%; }
