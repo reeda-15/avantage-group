@@ -247,10 +247,73 @@ function attachHero(s) {
   return { paints, winEvents, timelines };
 }
 
+function attachCoordinator(s, winEvents) {
+  const win = s.root.ownerDocument.defaultView;
+  const query = s.root.querySelector;
+  const main = { id: 'connected-systems-main' };
+  s.root.querySelector = selector => selector === '.connected-systems-main' ? main : query(selector);
+  win.document = s.root; win.innerHeight = 900; win.location = { hash: '' };
+  win.addEventListener = winEvents.addEventListener.bind(winEvents);
+  win.removeEventListener = winEvents.removeEventListener.bind(winEvents);
+  s.slots.forEach(slot => { slot.getBoundingClientRect = () => ({ top: 100, bottom: 700 }); });
+  vm.runInNewContext(fs.readFileSync('dist/connected-systems.js', 'utf8'), { window: win });
+  return win.AvantageConnectedSystems.start();
+}
+
+test('hero plus coordinator resumes an unfinished visible interlude after bfcache without resetting media or the watchdog', t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const s = setup({ records: fixtures() });
+  const { winEvents } = attachHero(s);
+  const coordinator = attachCoordinator(s, winEvents);
+  const lifecycle = name => { const event = new Event(name); event.persisted = true; winEvents.dispatchEvent(event); };
+  try {
+    s.observers[0].callback([{ target: s.slots[1], isIntersecting: true, intersectionRatio: .8 }]);
+    s.ready(); s.fire('timeupdate', 1.4);
+    const loads = s.video.loads, observers = s.observers.length;
+    lifecycle('pagehide'); assert.equal(s.video.paused, true);
+    t.mock.timers.tick(16000);
+    assert.equal(s.slots[1].classList.contains('scene-fallback'), false, 'a cached page must not expire its media watchdog');
+    lifecycle('pageshow');
+    assert.equal(s.video.paused, false, 'the existing interlude resumes');
+    assert.equal(s.video.currentTime, 1.4); assert.equal(s.video.loads, loads); assert.equal(s.observers.length, observers);
+    assert.equal(s.root.ownerDocument.defaultView.AvantageScenes.instance, s.instance);
+    t.mock.timers.tick(14000); assert.equal(s.slots[1].classList.contains('scene-fallback'), false);
+    t.mock.timers.tick(1001); assert.equal(s.slots[1].classList.contains('scene-fallback'), true, 'resumed playback has a fresh watchdog');
+  } finally { coordinator.destroy(); winEvents.dispatchEvent(new Event('pagehide')); }
+});
+
+test('cached interludes resume only while unfinished, visible and motion eligible', t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  for (const state of ['held', 'failed', 'offscreen', 'reduced', 'hidden']) {
+    const s = setup({ records: fixtures() }); const { winEvents } = attachHero(s);
+    const coordinator = attachCoordinator(s, winEvents);
+    const lifecycle = name => { const event = new Event(name); event.persisted = true; winEvents.dispatchEvent(event); };
+    try {
+      s.observers[0].callback([{ target: s.slots[1], isIntersecting: true, intersectionRatio: .8 }]);
+      s.ready(); s.fire('timeupdate', state === 'held' ? 2 : 1.3);
+      if (state === 'failed') s.fire('error');
+      lifecycle('pagehide');
+      if (state === 'offscreen') s.slots[1].getBoundingClientRect = () => ({ top: 1200, bottom: 1800 });
+      if (state === 'reduced') { s.motion.matches = true; s.motion.dispatchEvent(new Event('change')); }
+      if (state === 'hidden') s.root.ownerDocument.hidden = true;
+      lifecycle('pageshow'); assert.equal(s.video.paused, true, state + ' must not play');
+      const events = s.events.length;
+      t.mock.timers.tick(16000); assert.equal(s.events.length, events, state + ' must not arm a playback watchdog');
+      if (state === 'offscreen') {
+        s.slots[1].getBoundingClientRect = () => ({ top: 100, bottom: 700 });
+        s.observers[0].callback([{ target: s.slots[1], isIntersecting: true, intersectionRatio: .8 }]);
+        assert.equal(s.video.paused, false, 'returning visible unfinished scene resumes');
+        assert.equal(s.video.currentTime, 1.3);
+      }
+    } finally { coordinator.destroy(); winEvents.dispatchEvent(new Event('pagehide')); }
+  }
+});
+
 test('hero decoder yields to modular playback and resumes from the original source after release', () => {
   const s = setup({ reduced: true, records: fixtures() });
   const { paints, winEvents, timelines } = attachHero(s);
   try {
+    assert.equal(s.root.ownerDocument.defaultView.AvantageScenes.instance, s.instance, 'integration must adopt the hero scene controller instead of creating another');
     s.motion.matches = false; s.motion.dispatchEvent(new Event('change'));
     assert.equal(timelines.length, 1);
     s.instance.goTo('agents'); s.ready();

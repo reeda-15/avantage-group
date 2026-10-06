@@ -46,6 +46,7 @@
   document.addEventListener('avantage:scene-enter', sceneEnter);
   document.addEventListener('avantage:scene-release', sceneRelease);
   const scenes = window.AvantageScenes?.create(document, { video });
+  if (scenes) window.AvantageScenes.instance = scenes;
   function pump() {
     if (disposed || sceneOwned || !Number.isFinite(video.duration)) return;
     if (mobile.matches && !motion.matches) continueMobilePlayback();

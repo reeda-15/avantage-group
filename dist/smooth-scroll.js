@@ -3,10 +3,10 @@
   if (!document.querySelector('[data-cinematic]')) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const { gsap, ScrollTrigger, Lenis } = window;
-  let lenis;
+  let lenis, listening = false;
   const tick = seconds => lenis?.raf(seconds * 1000);
   const resize = () => lenis?.resize();
-  function start() {
+  function enable() {
     if (lenis || motion.matches || !gsap || !ScrollTrigger || !Lenis) return;
     gsap.registerPlugin(ScrollTrigger);
     lenis = new Lenis({
@@ -25,15 +25,31 @@
     lenis.destroy();
     lenis = undefined;
   }
+  function preferenceChanged() { motion.matches ? stop() : enable(); }
+  function start() {
+    if (!listening) {
+      motion.addEventListener?.('change', preferenceChanged);
+      window.addEventListener('pagehide', stop);
+      window.addEventListener('pageshow', start);
+      listening = true;
+    }
+    enable();
+  }
   window.AvantageScroll = {
     get active() { return !!lenis; },
+    start,
+    refresh: resize,
+    destroy() {
+      stop();
+      motion.removeEventListener?.('change', preferenceChanged);
+      window.removeEventListener?.('pagehide', stop);
+      window.removeEventListener?.('pageshow', start);
+      listening = false;
+    },
     scrollTo(top, options = {}) {
       if (lenis) lenis.scrollTo(top, options);
       else window.scrollTo({ top, behavior: options.immediate || motion.matches ? 'instant' : 'smooth' });
     }
   };
-  motion.addEventListener('change', () => motion.matches ? stop() : start());
-  window.addEventListener('pagehide', stop);
-  window.addEventListener('pageshow', start);
   start();
 })();

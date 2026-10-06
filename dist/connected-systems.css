@@ -327,3 +327,15 @@
   .transformation-connected { clip-path: none !important; }
   .transformation-controls, [data-transformation-enhanced="true"] .transformation-reveal { display: none; }
 }
+.systems-skip { position: fixed; inset: .75rem auto auto .75rem; z-index: 1000; max-width: calc(100% - 1.5rem); padding: 1rem; background: #d5f970; color: #14171b; transform: translateY(-200%); font-weight: 600; }
+.systems-skip:focus { transform: translateY(0); outline: 3px solid white; outline-offset: 3px; }
+textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #d5f970; outline-offset: 5px; }
+.story .hero-title { font-size: clamp(40px, 5.2vw, 84px); }
+.systems-finale .systems-container { position: relative; padding-block: clamp(2rem, 6vw, 6rem); }
+.systems-finale .systems-container::before { content: ""; display: block; width: min(14rem, 45%); height: 2px; margin-bottom: 2rem; background: linear-gradient(90deg, var(--systems-signal), transparent); }
+.brief-section { scroll-margin-top: 6rem; }
+@media (max-width: 700px) { .story .hero-title { font-size: 43px; } }
+@media (max-height: 650px) { .story .hero-title { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) {
+  .systems-finale *, .chapter-transition *, .chapter-transition { animation: none !important; transition: none !important; transform: none !important; }
+}

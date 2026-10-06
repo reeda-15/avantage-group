@@ -131,10 +131,13 @@
       api.instance = create(global.document, { onSelect(id) {
         global.document.dispatchEvent(new global.CustomEvent('avantage:chapter-select', { detail: { id } }));
       } });
-      global.addEventListener('pagehide', function cleanup(event) {
+      const destroy = api.instance.destroy;
+      function cleanup(event) {
         if (event.persisted) return;
         api.instance.destroy(); global.removeEventListener('pagehide', cleanup);
-      });
+      }
+      api.instance.destroy = function () { destroy(); global.removeEventListener('pagehide', cleanup); };
+      global.addEventListener('pagehide', cleanup);
     }
   }
 })(typeof window === 'undefined' ? {} : window);

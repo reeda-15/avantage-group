@@ -51,7 +51,7 @@
       srcDesktop: sourceElements.find(({ element }) => !element.getAttribute('media'))?.src || '',
       srcMobile: sourceElements.find(({ element }) => element.getAttribute('media'))?.src || ''
     };
-    let current = null, borrowed = false, disposed = false, hint = null, timer, generation = 0;
+    let current = null, borrowed = false, disposed = false, suspended = false, hint = null, timer, generation = 0;
     const visible = new Map();
     const sourceFor = record => mobile.matches ? record.srcMobile || record.srcDesktop : record.srcDesktop;
     const emit = (name, scene) => root.dispatchEvent(new win.CustomEvent(`avantage:scene-${name}`, {
@@ -86,7 +86,8 @@
       current.slot.classList.add('scene-fallback'); hold();
     }
     function armWatchdog() {
-      clearTimer(); timer = setTimeout(showFallback, 15000);
+      clearTimer();
+      if (!disposed && !suspended && !current?.resumePending && !current?.held) timer = setTimeout(showFallback, 15000);
     }
     function preload(id) {
       if (disposed || motion.matches || !video || current?.failed) return false;
@@ -126,7 +127,7 @@
       if (disposed) return false;
       const scene = lookup(id, records), slot = scene && slots.get(scene.id);
       if (!scene || !slot) return false;
-      if (current?.scene === scene) return true;
+      if (current?.scene === scene) { if (current.resumePending && !suspended) resume(); return true; }
       generation++; clearTimer(); clearHint(); exit();
       if (current) clearSlot(current.slot);
       video?.pause();
@@ -140,16 +141,20 @@
       current.start = Math.min(maximum, current.scene.startFrame / fps);
       current.holdTime = Math.min(maximum, current.scene.holdFrame / fps);
       current.exitTime = Math.min(maximum, current.scene.exitFrame / fps);
-      video.currentTime = current.start;
+      if (!current.started) video.currentTime = current.start;
     }
     function decoded() {
-      if (!current || !borrowed || motion.matches || !video.getAttribute('src') || video.readyState < 2) return;
+      if (!current || !borrowed || suspended || current.resumePending || motion.matches || !video.getAttribute('src') || video.readyState < 2) return;
       // Keep the poster until a nonzero starting frame has finished seeking.
       if (video.seeking) return;
       video.hidden = false; current.slot.classList.add('scene-ready');
       if (current.started) return;
       current.started = true;
       if (current.holdTime <= current.start) { video.pause(); hold(); return; }
+      play();
+    }
+    function play() {
+      armWatchdog();
       const token = generation;
       try {
         const attempt = video.play();
@@ -157,14 +162,14 @@
       } catch (_) { showFallback(); }
     }
     function progress() {
-      if (!current || !borrowed || motion.matches || !video.getAttribute('src')) return;
+      if (!current || !borrowed || suspended || current.resumePending || motion.matches || !video.getAttribute('src')) return;
       if (video.currentTime >= current.holdTime && !current.held) {
         video.pause(); video.currentTime = current.holdTime; hold();
       } else if (!current.held) armWatchdog();
       if (video.currentTime >= current.exitTime) { video.pause(); exit(); }
     }
     function error() {
-      if (!current || !borrowed || !video.getAttribute('src')) return;
+      if (!current || !borrowed || suspended || !video.getAttribute('src')) return;
       if (current.scene.id === 'intro' && !current.triedFallback && sourceFor(fallback)) {
         current.triedFallback = true; current.started = false; generation++;
         load(sourceFor(fallback)); return;
@@ -191,6 +196,25 @@
       if (disposed || !current) return;
       generation++; clearTimer(); clearHint(); activate();
     }
+    function suspend() {
+      if (disposed) return;
+      suspended = true; generation++; clearTimer(); clearHint();
+      if (borrowed) video.pause();
+    }
+    function resume() {
+      if (disposed) return;
+      suspended = !!doc.hidden;
+      if (suspended || !current || !borrowed || current.failed || current.held || current.exited || motion.matches || !video.getAttribute('src')) return;
+      const rect = current.slot.getBoundingClientRect?.();
+      const inViewport = rect ? rect.bottom > 0 && rect.top < (win.innerHeight || 900) : visible.has(current.slot) || !observer;
+      // Cached observer entries can describe the viewport from before departure.
+      // Keep the same frame parked until the actual slot is visible again.
+      current.resumePending = !inViewport;
+      if (!inViewport) return;
+      if (video.currentTime >= current.holdTime) { progress(); return; }
+      if (current.started && video.readyState >= 2 && !video.seeking) play();
+      else { current.started = false; armWatchdog(); decoded(); }
+    }
     const handlers = { loadedmetadata: metadata, loadeddata: decoded, seeked: decoded,
       timeupdate: progress, ended: hold, error };
     Object.entries(handlers).forEach(([name, handler]) => video?.addEventListener(name, handler));
@@ -201,11 +225,12 @@
         if (entry.isIntersecting && entry.intersectionRatio >= .25) visible.set(entry.target, entry.intersectionRatio);
         else visible.delete(entry.target);
       }
+      if (suspended) return;
       const target = Array.from(visible).sort((a, b) => b[1] - a[1])[0]?.[0];
       if (target) goTo(target.dataset.scene); else release();
     }, { threshold: [0, .25, .55, .8] }) : null;
     slots.forEach(slot => observer?.observe(slot));
-    return { goTo, preload, destroy() {
+    return { goTo, preload, suspend, resume, destroy() {
       if (disposed) return;
       disposed = true; observer?.disconnect(); visible.clear(); release(); clearTimer(); clearHint();
       Object.entries(handlers).forEach(([name, handler]) => video?.removeEventListener(name, handler));
