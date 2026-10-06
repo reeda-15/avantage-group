@@ -65,6 +65,72 @@
 .edition-navigation a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: .65rem .75rem; color: var(--systems-muted); font-size: .875rem; white-space: nowrap; border-radius: .25rem; }
 .edition-navigation a:hover, .edition-navigation a[aria-current="location"] { color: var(--systems-signal); background: #d5f9700d; }
 .edition-navigation a:focus-visible { outline-offset: 2px; }
+/* Semantic links remain the map's foundation; the paths only carry decoration. */
+.system-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-rows: repeat(3, minmax(120px, auto));
+  gap: 1.5rem clamp(1.25rem, 4vw, 4rem);
+  max-width: 100%;
+  margin-top: var(--systems-space-md);
+  isolation: isolate;
+}
+.system-map-hub {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 230px;
+  padding: 2rem 1rem;
+  border: 1px solid var(--systems-signal);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #303a27, var(--systems-bg) 75%);
+  text-align: center;
+  color: var(--systems-signal);
+  font-size: .8rem;
+  letter-spacing: .04em;
+  z-index: 1;
+}
+.system-map-hub-label { font: 400 clamp(1.5rem, 3vw, 2.8rem)/1.2 var(--systems-font-display); color: var(--systems-paper); letter-spacing: -.04em; margin-bottom: .8rem; }
+.system-map-brand-dot { color: var(--systems-signal); }
+.system-map-hub-note { margin-top: 1.25rem; font-size: .75rem; color: var(--systems-muted); letter-spacing: 0; }
+.system-map-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 120px;
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--systems-line);
+  border-radius: var(--systems-card-radius);
+  background: var(--systems-bg);
+  color: var(--systems-muted);
+  font-size: .8rem;
+  line-height: 1.5;
+  z-index: 1;
+}
+.system-map-node strong { font-size: 1.25rem; font-weight: 400; color: var(--systems-paper); }
+.system-map-number { font-size: .65rem; letter-spacing: .1em; color: var(--systems-muted); }
+.system-map-node:hover, .system-map-node[aria-current="true"] { border-color: var(--systems-signal); background: #20261d; }
+.system-map-node[aria-current="true"] strong { color: var(--systems-signal); }
+.system-map-node[data-system-node="think"] { grid-column: 1; grid-row: 1; }
+.system-map-node[data-system-node="connect"] { grid-column: 1; grid-row: 2; }
+.system-map-node[data-system-node="automate"] { grid-column: 1; grid-row: 3; }
+.system-map-node[data-system-node="build"] { grid-column: 3; grid-row: 1; }
+.system-map-node[data-system-node="understand"] { grid-column: 3; grid-row: 2; }
+.system-map-node[data-system-node="create"] { grid-column: 3; grid-row: 3; }
+.system-map-connections { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+.system-map-connections path { fill: none; stroke: var(--systems-line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.system-map-connections path[data-selected="true"] { stroke: var(--systems-signal); stroke-width: 2; stroke-dasharray: 4 6; }
+.system-map[data-signal-motion="true"] .system-map-connections path[data-selected="true"] { animation: system-map-signal 5s linear infinite; }
+@keyframes system-map-signal { to { stroke-dashoffset: -100; } }
 @media (max-width: 1000px) {
   .edition-navigation-row { justify-content: flex-start; }
 }
@@ -72,7 +138,12 @@
   .connected-systems-main { --systems-gutter: 1.5rem; --systems-space-lg: 3.5rem; --systems-space-md: 2rem; --systems-anchor-offset: 5rem; }
   .edition-chapter h2 { max-width: 100%; }
   .systems-actions { align-items: stretch; flex-direction: column; }
+  .system-map { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; gap: .75rem; }
+  .system-map-hub { grid-column: 1 / -1; grid-row: auto; min-height: 180px; border-radius: var(--systems-card-radius); margin-bottom: .5rem; }
+  .system-map-node[data-system-node] { grid-column: auto; grid-row: auto; padding: 1rem; }
+  .system-map-connections { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .connected-systems-main { scroll-behavior: auto; }
+  .system-map[data-signal-motion="true"] .system-map-connections path[data-selected="true"] { animation: none; }
 }

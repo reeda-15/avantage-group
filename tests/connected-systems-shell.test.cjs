@@ -37,7 +37,9 @@ test('all chapters are readable ordered HTML without scripts or video metadata',
     assert.ok(section, `${id} is a semantic section`);
     assert.ok(section.index > previous, `${id} follows the previous chapter`);
     previous = section.index;
-    assert.doesNotMatch(section[0], /\b(?:hidden|inert)\b|aria-hidden="true"/, 'essential chapter is exposed');
+    // Decorative connections are intentionally absent from the accessibility tree.
+    const semanticContent = section[0].replace(/<svg\b[^>]*aria-hidden="true"[^>]*>[\s\S]*?<\/svg>/g, '');
+    assert.doesNotMatch(semanticContent, /\b(?:hidden|inert)\b|aria-hidden="true"/, 'essential chapter is exposed');
     const heading = section[1].match(/<h2\b[^>]*id="([^\"]+)"[^>]*>([\s\S]*?)<\/h2>/);
     assert.ok(heading, `${id} has a level two heading`);
     assert.equal(text(heading[2]), headings[index]);

@@ -11,7 +11,7 @@
     @media(max-width:600px){header{padding:20px}header strong{font-size:20px}.controls{padding:28px 20px 20px}.labels{font-size:11px}}
   </style>
   <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7"><link rel="stylesheet" href="connected-systems.css"><link rel="stylesheet" href="cinematic-scenes.css">
-  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script>
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script><script defer src="system-map.js"></script>
 </head>
 <body>
 
@@ -44,6 +44,23 @@
         <h2 id="system-overview-title">Every part of your business. Working as one.</h2>
         <p>Your business already has the moving parts. We make them work as one.</p>
         <p class="systems-brand-statement">Business runs better by design.</p>
+        <div class="system-map" data-system-map role="group" aria-label="Explore the Avantage operating system">
+          <div class="system-map-hub"><span class="system-map-hub-label">Avantage<span class="system-map-brand-dot">.</span> AI</span><span>Operating system</span><span class="system-map-hub-note">One connected business.</span></div>
+          <svg class="system-map-connections" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path data-system-path="think" d="M500 300 C360 300 390 100 170 100" pathLength="100"/>
+            <path data-system-path="connect" d="M500 300 L170 300" pathLength="100"/>
+            <path data-system-path="automate" d="M500 300 C360 300 390 500 170 500" pathLength="100"/>
+            <path data-system-path="build" d="M500 300 C640 300 610 100 830 100" pathLength="100"/>
+            <path data-system-path="understand" d="M500 300 L830 300" pathLength="100"/>
+            <path data-system-path="create" d="M500 300 C640 300 610 500 830 500" pathLength="100"/>
+          </svg>
+          <a class="system-map-node" href="#ai-agents" data-system-node="think"><span class="system-map-number">01</span><strong>Think</strong><span>Agents with business context.</span></a>
+          <a class="system-map-node" href="#automations" data-system-node="connect"><span class="system-map-number">02</span><strong>Connect</strong><span>Tools that share the work.</span></a>
+          <a class="system-map-node" href="#automations" data-system-node="automate"><span class="system-map-number">03</span><strong>Automate</strong><span>Reliable everyday workflows.</span></a>
+          <a class="system-map-node" href="#custom-software" data-system-node="build"><span class="system-map-number">04</span><strong>Build</strong><span>Software shaped around you.</span></a>
+          <a class="system-map-node" href="#data-insights" data-system-node="understand"><span class="system-map-number">05</span><strong>Understand</strong><span>Evidence for every decision.</span></a>
+          <a class="system-map-node" href="#creative-ai" data-system-node="create"><span class="system-map-number">06</span><strong>Create</strong><span>A repeatable creative process.</span></a>
+        </div>
       </div>
     </section>
     <section class="edition-chapter" id="ai-agents" aria-labelledby="ai-agents-title" tabindex="-1">
