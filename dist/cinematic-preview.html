@@ -11,7 +11,7 @@
     @media(max-width:600px){header{padding:20px}header strong{font-size:20px}.controls{padding:28px 20px 20px}.labels{font-size:11px}}
   </style>
   <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7"><link rel="stylesheet" href="connected-systems.css"><link rel="stylesheet" href="cinematic-scenes.css">
-  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script><script defer src="system-map.js"></script><script defer src="capability-chapters.js"></script>
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script><script defer src="system-map.js"></script><script defer src="capability-chapters.js"></script><script defer src="system-transformation.js"></script>
 </head>
 <body>
 
@@ -170,6 +170,32 @@
         <svg class="chapter-connections" viewBox="0 0 900 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M150 0 V20 Q150 30 160 30 H740 Q750 30 750 20 V0 M450 0 V60"/></svg>
         <div class="chapter-scenario"><h3>In practice</h3><p>A product launch begins with one approved direction. The studio develops image concepts, a short film and channel variations, then brings the team together for review before delivery.</p><a class="systems-action" href="#brief">Plan your creative system ↗</a></div>
         <div class="chapter-handoff"><span>See how the parts come together.</span><a href="#our-work">Next / Our Work →</a></div>
+      </div>
+    </section>
+    <section class="edition-chapter system-transformation" id="system-transformation" aria-labelledby="system-transformation-title" tabindex="-1">
+      <div class="systems-container" data-transformation data-transformation-scroll>
+        <p class="chapter-label">The connected difference</p>
+        <h2 id="system-transformation-title">From moving parts to a working system.</h2>
+        <p>See how a fragmented operating model can become connected business work.</p>
+        <div class="transformation-visual">
+          <svg class="transformation-diagram" viewBox="0 0 1000 280" aria-hidden="true" focusable="false">
+            <g class="transformation-fragmented"><path d="M90 80H210 M280 185H390 M470 70H570 M640 200H730 M820 95H920"/><rect x="55" y="55" width="70" height="50" rx="6"/><rect x="245" y="160" width="70" height="50" rx="6"/><rect x="435" y="45" width="70" height="50" rx="6"/><rect x="605" y="175" width="70" height="50" rx="6"/><rect x="785" y="70" width="70" height="50" rx="6"/><circle cx="925" cy="175" r="15"/><circle cx="180" cy="225" r="9"/><circle cx="355" cy="60" r="12"/></g>
+            <g class="transformation-connected"><rect width="1000" height="280" fill="#1c261a" stroke="none"/><path d="M90 140H910 M90 80V200 M280 80V200 M470 80V200 M660 80V200 M850 80V200"/><rect x="55" y="55" width="70" height="50" rx="6"/><rect x="245" y="175" width="70" height="50" rx="6"/><rect x="435" y="55" width="70" height="50" rx="6"/><rect x="625" y="175" width="70" height="50" rx="6"/><rect x="815" y="55" width="70" height="50" rx="6"/><circle cx="90" cy="140" r="7"/><circle cx="280" cy="140" r="7"/><circle cx="470" cy="140" r="7"/><circle cx="660" cy="140" r="7"/><circle cx="850" cy="140" r="7"/></g>
+          </svg>
+          <div class="transformation-reveal" aria-hidden="true"></div>
+        </div>
+        <div class="transformation-controls" data-transformation-controls hidden>
+          <label for="transformation-position">Explore the connected view</label>
+          <input id="transformation-position" data-transformation-range type="range" min="0" max="100" step="1" value="50" aria-describedby="transformation-help">
+          <p id="transformation-help">Drag or use the arrow keys to move the diagram reveal. The complete before and after comparison stays below.</p>
+        </div>
+        <dl class="transformation-pairs">
+          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Manual handoffs</dt><dd><span class="transformation-state">After</span>Automated workflows</dd></div>
+          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Disconnected tools</dt><dd><span class="transformation-state">After</span>Connected systems</dd></div>
+          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Slow reporting</dt><dd><span class="transformation-state">After</span>Live intelligence</dd></div>
+          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Generic AI usage</dt><dd><span class="transformation-state">After</span>Company-specific AI</dd></div>
+          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Information chasing</dt><dd><span class="transformation-state">After</span>Proactive information delivery</dd></div>
+        </dl>
       </div>
     </section>
     <section class="edition-chapter" id="our-work" aria-labelledby="our-work-title" tabindex="-1">
