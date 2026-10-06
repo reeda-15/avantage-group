@@ -11,7 +11,7 @@
     @media(max-width:600px){header{padding:20px}header strong{font-size:20px}.controls{padding:28px 20px 20px}.labels{font-size:11px}}
   </style>
   <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7"><link rel="stylesheet" href="connected-systems.css"><link rel="stylesheet" href="cinematic-scenes.css">
-  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script><script defer src="system-map.js"></script><script defer src="capability-chapters.js"></script><script defer src="system-transformation.js"></script><script defer src="case-studies.js"></script>
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script><script defer src="system-map.js"></script><script defer src="capability-chapters.js"></script><script defer src="system-transformation.js"></script><script defer src="case-studies.js"></script><script defer src="system-builder.js"></script>
 </head>
 <body>
 
@@ -238,6 +238,32 @@
           </div>
           <a class="systems-text-action case-all-work" href="works.html#projects">Explore all Avantage projects →</a>
         </div>
+      </div>
+    </section>
+    <section class="edition-chapter system-builder" id="build-your-system" aria-labelledby="system-builder-title" tabindex="-1">
+      <div class="systems-container" data-system-builder>
+        <p class="chapter-label">Build Your System</p>
+        <h2 id="system-builder-title">Build your system.</h2>
+        <p>Start with the work you want to improve. Choose your needs to see a suggested combination, then bring it into your project brief.</p>
+        <div class="builder-layout">
+          <fieldset class="builder-problems" data-builder-problems disabled>
+            <legend>What’s slowing your business down?</legend>
+            <label><input type="checkbox" name="system-problems" value="manual-work"><span>Too much manual work</span></label>
+            <label><input type="checkbox" name="system-problems" value="disconnected-tools"><span>Disconnected tools</span></label>
+            <label><input type="checkbox" name="system-problems" value="slow-support"><span>Slow customer support</span></label>
+            <label><input type="checkbox" name="system-problems" value="poor-reporting"><span>Poor reporting</span></label>
+            <label><input type="checkbox" name="system-problems" value="custom-software"><span>Need custom software</span></label>
+            <label><input type="checkbox" name="system-problems" value="content-workflow"><span>Need an AI content workflow</span></label>
+          </fieldset>
+          <div class="builder-recommendation" role="region" aria-labelledby="builder-result-label" aria-live="polite" aria-atomic="true">
+            <p class="chapter-label" id="builder-result-label">Suggested system</p>
+            <h3 data-builder-title>Your system starts with your needs.</h3>
+            <ul class="builder-components" data-builder-components><li>Workflow Automation</li><li>Custom Software</li><li>Analytics Dashboard</li></ul>
+            <p data-builder-summary>We can connect automation, software and reporting around your business. Tell us which parts matter in your brief.</p>
+          </div>
+        </div>
+        <div class="systems-actions"><a class="systems-action" href="#brief" data-builder-continue>Design this system with us</a><button class="systems-text-action builder-reset" type="button" data-builder-reset hidden>Reset choices</button></div>
+        <noscript><p>Describe any of these needs in the project brief. We’ll help you choose a useful starting system.</p></noscript>
       </div>
     </section>
     <section class="edition-chapter systems-finale" id="systems-finale" aria-labelledby="systems-finale-title" tabindex="-1">

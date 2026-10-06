@@ -1,4 +1,4 @@
-window.createCinematicContent = function(stage, navigate) {
+if (typeof window !== 'undefined') window.createCinematicContent = function(stage, navigate) {
   const host=document.createElement('div');host.className='story';host.setAttribute('aria-label','Our story');
   stage.querySelector('header').before(host);
   const button=`<button class="story-button" data-go="callback">Book a free strategy call <span aria-hidden="true">↗</span></button>`;
@@ -57,3 +57,33 @@ window.createCinematicContent = function(stage, navigate) {
   update(0);
   return {update,dispose(){host.removeEventListener('click',click);timelines.forEach(t=>t.kill());host.remove();}};
 };
+
+// Add confirmed system needs to the existing brief without replacing user work.
+(function (global) {
+  'use strict';
+  const services = new Map([
+    ['AI Agent', ['Task Automation']],
+    ['Workflow Automation', ['Task Automation']],
+    ['CRM Automation', ['Task Automation', 'Custom Software']],
+    ['Custom Software', ['Custom Software']],
+    ['Analytics Dashboard', ['Custom Software']],
+    ['AI Content Workflow', ['Marketing Automation']]
+  ]);
+  function applyRecommendation(root, recommendation) {
+    const form = root?.matches?.('#brief-form') ? root : root?.querySelector?.('#brief-form');
+    const message = form?.querySelector('[name="message"]');
+    if (!message || !Array.isArray(recommendation?.components) || !recommendation.components.length || typeof recommendation.summary !== 'string' || !recommendation.summary.trim()) return false;
+    const summary = recommendation.summary;
+    const current = message.value;
+    const value = current.includes(summary) ? current : current + (current ? '\n\n' : '') + summary;
+    // Leave a full message and all selections intact; the chooser explains how to continue.
+    if (message.maxLength >= 0 && value.length > message.maxLength) return false;
+    const wanted = new Set(recommendation.components.flatMap(component => services.get(component) || []));
+    Array.from(form.querySelectorAll('input[name="services"]')).forEach(input => { if (wanted.has(input.value)) input.checked = true; });
+    message.value = value;
+    return true;
+  }
+  const api = { applyRecommendation };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else global.AvantageBrief = api;
+})(typeof window === 'undefined' ? {} : window);

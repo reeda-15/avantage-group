@@ -1,4 +1,20 @@
 /* Shared edition foundations. Chapters stay in normal document flow. */
+/* Native choices and a text recommendation stay in normal document flow. */
+.builder-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--systems-space-md); margin-top: var(--systems-space-md); }
+.builder-problems { min-width: 0; margin: 0; padding: 1.5rem; border: 1px solid var(--systems-line); border-radius: var(--systems-card-radius); }
+.builder-problems legend { max-width: 100%; padding-inline: .5rem; font-size: 1rem; line-height: 1.5; }
+.builder-problems label { display: flex; align-items: center; gap: .85rem; min-height: 48px; padding-block: .6rem; cursor: pointer; }
+.builder-problems input { flex: 0 0 auto; width: 20px; height: 20px; margin: 0; accent-color: var(--systems-signal); }
+.builder-problems span { min-width: 0; line-height: 1.5; }
+.builder-recommendation { min-width: 0; padding: 1.5rem; background: var(--systems-panel); border: 1px solid var(--systems-signal); border-radius: var(--systems-card-radius); }
+.builder-recommendation h3 { margin: 0 0 1.5rem; font: 400 clamp(1.6rem, 2.5vw, 2.4rem)/1.25 var(--systems-font-display); }
+.builder-components { display: flex; flex-wrap: wrap; gap: .65rem; list-style: none; padding: 0; margin: 0 0 1.5rem; }
+.builder-components li { max-width: 100%; padding: .6rem .8rem; border: 1px solid var(--systems-line); border-radius: .25rem; font-size: .8rem; line-height: 1.5; }
+.edition-chapter .builder-recommendation > p:not(.chapter-label) { margin: 0; font-size: 1rem; }
+.builder-reset { border: 0; background: transparent; color: var(--systems-paper); cursor: pointer; font: inherit; }
+.builder-reset[hidden] { display: none; }
+.system-builder [aria-disabled="true"] { opacity: .6; }
+@media (max-width: 800px) { .builder-layout { grid-template-columns: minmax(0, 1fr); } }
 /* Case stories disclose verified system scope in the normal reading flow. */
 .case-studies { margin-top: var(--systems-space-md); min-width: 0; }
 .case-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
