@@ -1,4 +1,32 @@
 /* Shared edition foundations. Chapters stay in normal document flow. */
+/* Case stories disclose verified system scope in the normal reading flow. */
+.case-studies { margin-top: var(--systems-space-md); min-width: 0; }
+.case-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.case-card { min-width: 0; border: 1px solid var(--systems-line); background: var(--systems-panel); border-radius: var(--systems-card-radius); }
+.case-image { padding: .75rem; background: #f7f8fa; border-radius: var(--systems-card-radius) var(--systems-card-radius) 0 0; }
+.case-image img { display: block; width: 100%; height: auto; object-fit: contain; }
+.case-card-copy { padding: 1.5rem; }
+.case-card h3, .case-panel h3 { margin: 0 0 1rem; font: 400 clamp(1.6rem, 2.3vw, 2.4rem)/1.15 var(--systems-font-display); }
+.edition-chapter .case-category { color: var(--systems-signal); font-size: .7rem; letter-spacing: .07em; }
+.edition-chapter .case-card-copy > p:not(.case-category) { font-size: 1rem; }
+.case-story-link, .case-project-link { display: flex; align-items: center; min-height: 44px; padding-block: .6rem; font-size: .9rem; text-decoration: underline; text-underline-offset: .3em; }
+.case-story-link { color: var(--systems-signal); }
+.case-story-link[aria-expanded="true"] { text-decoration-thickness: 2px; }
+.case-project-link { color: var(--systems-muted); }
+.case-details { min-width: 0; }
+.case-panel { padding: clamp(1.5rem, 4vw, 3rem); margin-top: 1.5rem; border: 1px solid var(--systems-signal); border-radius: var(--systems-card-radius); background: #1b241c; scroll-margin-top: var(--systems-anchor-offset); }
+.case-panel[hidden] { display: none; }
+.case-panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; }
+.case-panel-heading > div { min-width: 0; }
+.case-close { display: none; flex: 0 0 auto; min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--systems-line); border-radius: .25rem; color: var(--systems-paper); background: transparent; font: inherit; cursor: pointer; }
+.case-studies[data-cases-enhanced="true"] .case-close { display: inline-flex; align-items: center; }
+.case-story { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-block: 1rem; }
+.case-story > div { min-width: 0; }
+.case-story h4 { margin: 0 0 .75rem; color: var(--systems-signal); font-size: .8rem; font-weight: 400; letter-spacing: .04em; }
+.edition-chapter .case-story p { font-size: 1rem; }
+.case-all-work { margin-top: 1.5rem; }
+@media (max-width: 900px) { .case-grid { grid-template-columns: minmax(0, 1fr); } .case-story { grid-template-columns: minmax(0, 1fr); gap: .75rem; } }
+@media (max-width: 500px) { .case-panel-heading { flex-direction: column; gap: .5rem; } .case-close { align-self: flex-end; } }
 .connected-systems-main {
   --systems-bg: #14171b;
   --systems-panel: #1e242a;
