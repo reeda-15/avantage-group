@@ -10,8 +10,8 @@
     .controls{position:absolute;bottom:0;left:0;right:0;padding:35px 4vw 22px;background:linear-gradient(transparent,#14171bcc);display:grid;gap:12px}.labels{display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.03em}input{width:100%;accent-color:#ece5d9;cursor:pointer}footer{padding:50px 4vw;text-align:center;font-size:14px}footer a{text-decoration:underline}#notice{font-size:12px;margin:0;color:#dfd9ce}
     @media(max-width:600px){header{padding:20px}header strong{font-size:20px}.controls{padding:28px 20px 20px}.labels{font-size:11px}}
   </style>
-  <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7"><link rel="stylesheet" href="connected-systems.css">
-  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-preview.js?v=12"></script>
+  <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7"><link rel="stylesheet" href="connected-systems.css"><link rel="stylesheet" href="cinematic-scenes.css">
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script>
 </head>
 <body>
 
@@ -25,6 +25,7 @@
       <div class="controls"><div class="labels"><span id="instruction">Explore the story</span><span id="chapter-label"></span><output id="time" aria-hidden="true"></output></div><input id="position" type="range" min="0" max="1000" value="0" aria-label="Story position"><p id="notice" role="status">Loading the cinematic preview…</p></div>
     </section>
   <main class="connected-systems-main" aria-label="The Connected Systems Edition">
+    <div class="chapter-transition" data-scene="intro" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
     <section class="edition-chapter edition-overview" id="system-overview" aria-labelledby="system-overview-title" tabindex="-1">
       <div class="systems-container">
         <p class="edition-marker">Systems 2026</p>
@@ -35,6 +36,7 @@
       </div>
     </section>
     <section class="edition-chapter" id="ai-agents" aria-labelledby="ai-agents-title" tabindex="-1">
+      <div class="chapter-transition" data-scene="agents" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
       <div class="systems-container">
         <p class="chapter-label">01 / AI Agents</p>
         <h2 id="ai-agents-title">A team that can think, act, and report.</h2>
@@ -42,6 +44,7 @@
       </div>
     </section>
     <section class="edition-chapter" id="automations" aria-labelledby="automations-title" tabindex="-1">
+      <div class="chapter-transition" data-scene="automations" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
       <div class="systems-container">
         <p class="chapter-label">02 / Automations</p>
         <h2 id="automations-title">From repetitive work to reliable systems.</h2>
@@ -49,6 +52,7 @@
       </div>
     </section>
     <section class="edition-chapter" id="custom-software" aria-labelledby="custom-software-title" tabindex="-1">
+      <div class="chapter-transition" data-scene="software" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
       <div class="systems-container">
         <p class="chapter-label">03 / Custom Software</p>
         <h2 id="custom-software-title">Software shaped around the business.</h2>
@@ -56,6 +60,7 @@
       </div>
     </section>
     <section class="edition-chapter" id="data-insights" aria-labelledby="data-insights-title" tabindex="-1">
+      <div class="chapter-transition" data-scene="insights" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
       <div class="systems-container">
         <p class="chapter-label">04 / Data &amp; Insights</p>
         <h2 id="data-insights-title">Decisions arrive with the evidence.</h2>
@@ -63,6 +68,7 @@
       </div>
     </section>
     <section class="edition-chapter" id="creative-ai" aria-labelledby="creative-ai-title" tabindex="-1">
+      <div class="chapter-transition" data-scene="creative" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
       <div class="systems-container">
         <p class="chapter-label">05 / Creative AI</p>
         <h2 id="creative-ai-title">A production system for every campaign.</h2>
@@ -70,6 +76,7 @@
       </div>
     </section>
     <section class="edition-chapter" id="our-work" aria-labelledby="our-work-title" tabindex="-1">
+      <div class="chapter-transition" data-scene="work" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
       <div class="systems-container">
         <p class="chapter-label">06 / Our Work</p>
         <h2 id="our-work-title">Connected systems. Real business work.</h2>
@@ -77,6 +84,7 @@
       </div>
     </section>
     <section class="edition-chapter systems-finale" id="systems-finale" aria-labelledby="systems-finale-title" tabindex="-1">
+      <div class="chapter-transition" data-scene="finale" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
       <div class="systems-container">
         <p class="chapter-label">Your next system</p>
         <h2 id="systems-finale-title">Your business already has the moving parts. We make them work as one.</h2>
