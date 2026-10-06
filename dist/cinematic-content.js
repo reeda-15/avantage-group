@@ -1,4 +1,4 @@
-if (typeof window !== 'undefined') window.createCinematicContent = function(stage, navigate) {
+window.createCinematicContent = function(stage, navigate) {
   const host=document.createElement('div');host.className='story';host.setAttribute('aria-label','Our story');
   stage.querySelector('header').before(host);
   const button=`<button class="story-button" data-go="callback">Book a free strategy call <span aria-hidden="true">↗</span></button>`;
@@ -11,7 +11,7 @@ if (typeof window !== 'undefined') window.createCinematicContent = function(stag
   const services=[['Task automation','Follow-ups, invoicing, scheduling, and reminders.'],['Custom software','ERP, CRM, PLM, billing, and dashboards.'],['Web & app development','Business websites and mobile apps.'],['Marketing automation','Lead capture, follow-up sequences, and onboarding.'],['E-commerce','Online stores with connected inventory and checkout.'],['Complex custom systems','AI platforms and operational command centres.']];
   const articles=[
     ['intro','',``],
-    ['hero','01 / YOUR ADVANTAGE',`<h2 class="hero-title" data-reveal><span class="brand-label">AVANTAGE AI</span>Your business.<br><em>Running smarter.</em></h2><p data-reveal>AI automation, custom software, websites, and apps—built around how your business works.</p><div data-reveal class="actions">${button}<button class="text-button" data-go="project-0">Explore our work ↓</button></div>`],
+    ['hero','01 / YOUR ADVANTAGE',`<h1 data-reveal><span class="brand-label">AVANTAGE AI</span>Your business.<br><em>Running smarter.</em></h1><p data-reveal>AI automation, custom software, websites, and apps—built around how your business works.</p><div data-reveal class="actions">${button}<button class="text-button" data-go="project-0">Explore our work ↓</button></div>`],
     ['message','02 / A BETTER WAY TO WORK',`<h2 class="message-lines"><span>Your business shouldn’t depend on you for every update.</span><span>Connect your operations. Automate repetitive work.</span><span>See what’s happening—without chasing your team.</span></h2>`],
     ['benefits','03 / WHAT WE DO FOR YOU',`<h2 data-reveal>Less manual work.<br><em>More control.</em></h2><p data-reveal>Save time. Reduce repetitive costs.<br>Keep leads, payments, and operations moving.</p><dl class="stats" data-reveal>${[[23,'','Clients'],[37,'₹','Revenue moved'],[177,'','Tasks automated'],[11,'','Industries served']].map(([n,p,l],i)=>`<div><dt>${l}</dt><dd data-count="${n}" data-prefix="${p}" data-suffix="${i===1?'L+':i===2?'+':''}" aria-label="${p}${n}${i===1?' lakh plus':i===2?' plus':''}">${p}${n}${i===1?'L+':i===2?'+':''}</dd></div>`).join('')}</dl>`],
     ...projects.map(([title,body,slug],i)=>[`project-${i}`,`04 / SELECTED WORK · 0${i+1} OF 04`,`<span class="project-index" aria-hidden="true" data-reveal>0${i+1}</span><h2 data-reveal>${title}</h2><p data-reveal>${body}</p><button data-reveal class="text-button" data-go="contact">Discuss a similar project ↓</button>`]),
@@ -31,7 +31,7 @@ if (typeof window !== 'undefined') window.createCinematicContent = function(stag
   const panels=[...host.children];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const timelines=panels.map((p,i)=>{
-    const t=window.gsap?.timeline({paused:true});if(!t)return null;const items=p.querySelectorAll('[data-reveal]');
+    const t=gsap.timeline({paused:true});const items=p.querySelectorAll('[data-reveal]');
     if(items.length) t.fromTo(items,{y:24,opacity:0},{y:0,opacity:1,duration:.16,stagger:.035,ease:'power2.out'},.06);
     if(p.classList.contains('message')) t.fromTo(p.querySelectorAll('.message-lines span'),{opacity:.18,y:12},{opacity:1,y:0,duration:.18,stagger:.18},.08);
     if(p.classList.contains('team')) p.querySelectorAll('figure').forEach((f,j)=>t.fromTo(f,{x:j?35:-35,opacity:0},{x:0,opacity:1,duration:.22},.15+j*.06));
@@ -47,7 +47,7 @@ if (typeof window !== 'undefined') window.createCinematicContent = function(stag
     const entry=index===0?1:Math.min(1,local/.12);
     const exit=index===panels.length-1?1:Math.min(1,(1-local)/.12);
     panel.style.opacity=reduced.matches?'1':String(Math.min(entry,exit));
-    timelines[index]?.progress(reduced.matches?1:local);
+    timelines[index].progress(reduced.matches?1:local);
     const countProgress=reduced.matches?1:Math.min(1,Math.max(0,(local-.1)/.4));
     panel.querySelectorAll('[data-count]').forEach(el=>el.textContent=`${el.dataset.prefix}${Math.round(Number(el.dataset.count)*countProgress)}${el.dataset.suffix}`);
     document.querySelector('#chapter-label').textContent=articles[index][1];
@@ -55,35 +55,5 @@ if (typeof window !== 'undefined') window.createCinematicContent = function(stag
   function click(e){const target=e.target.closest('[data-go]');if(target)navigate(target.dataset.go);}
   host.addEventListener('click',click);
   update(0);
-  return {update,dispose(){host.removeEventListener('click',click);timelines.forEach(t=>t?.kill());host.remove();}};
+  return {update,dispose(){host.removeEventListener('click',click);timelines.forEach(t=>t.kill());host.remove();}};
 };
-
-// Add confirmed system needs to the existing brief without replacing user work.
-(function (global) {
-  'use strict';
-  const services = new Map([
-    ['AI Agent', ['Task Automation']],
-    ['Workflow Automation', ['Task Automation']],
-    ['CRM Automation', ['Task Automation', 'Custom Software']],
-    ['Custom Software', ['Custom Software']],
-    ['Analytics Dashboard', ['Custom Software']],
-    ['AI Content Workflow', ['Marketing Automation']]
-  ]);
-  function applyRecommendation(root, recommendation) {
-    const form = root?.matches?.('#brief-form') ? root : root?.querySelector?.('#brief-form');
-    const message = form?.querySelector('[name="message"]');
-    if (!message || !Array.isArray(recommendation?.components) || !recommendation.components.length || typeof recommendation.summary !== 'string' || !recommendation.summary.trim()) return false;
-    const summary = recommendation.summary;
-    const current = message.value;
-    const value = current.includes(summary) ? current : current + (current ? '\n\n' : '') + summary;
-    // Leave a full message and all selections intact; the chooser explains how to continue.
-    if (message.maxLength >= 0 && value.length > message.maxLength) return false;
-    const wanted = new Set(recommendation.components.flatMap(component => services.get(component) || []));
-    Array.from(form.querySelectorAll('input[name="services"]')).forEach(input => { if (wanted.has(input.value)) input.checked = true; });
-    message.value = value;
-    return true;
-  }
-  const api = { applyRecommendation };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else global.AvantageBrief = api;
-})(typeof window === 'undefined' ? {} : window);

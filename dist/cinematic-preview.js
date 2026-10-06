@@ -11,15 +11,13 @@
   const context = canvas.getContext('2d', {alpha:false});
   const stars = window.createCinematicStars?.(document.querySelector('.stage'));
   const billboards = window.createCinematicBillboards?.(document.querySelector('.stage'));
-  let timeline, target = 0, disposed = false, stallTimer, mobileSettleTimer, dragging = false, presented = -1, scrollPlayback = false, sceneOwned = false;
-  let heroConfigured = false, heroPreferences = '';
-  const preferenceKey = () => `${motion.matches}:${mobile.matches}`;
+  let timeline, target = 0, disposed = false, stallTimer, mobileSettleTimer, dragging = false, presented = -1, scrollPlayback = false;
   const content = window.createCinematicContent?.(document.querySelector('.stage'), jump);
   const maximum = () => Math.max(0, (Math.round(video.duration * 48) - 1) / 48);
-  const createHeroSeeker = () => CinematicTime.createSeeker(video, () => {
+  const seeker = CinematicTime.createSeeker(video, () => {
     clearTimeout(stallTimer); stallTimer = undefined; notice.textContent = '';
   }, frameTime => {
-    if (disposed || sceneOwned) return;
+    if (disposed) return;
     if (frameTime === presented) return;
     presented = frameTime;
     stars?.update(frameTime);
@@ -32,23 +30,8 @@
       canvas.style.visibility = 'visible';
     } else video.style.opacity = '1';
   });
-  let seeker = createHeroSeeker();
-  function sceneEnter() {
-    if (sceneOwned) return;
-    sceneOwned = true; scrollPlayback = false; video.pause(); seeker.dispose();
-    clearTimeout(stallTimer); stallTimer = undefined; clearTimeout(mobileSettleTimer);
-  }
-  function sceneRelease() {
-    if (!sceneOwned || disposed) return;
-    sceneOwned = false; presented = -1; seeker = createHeroSeeker();
-    if (video.readyState >= 1) heroMetadata();
-  }
-  document.addEventListener('avantage:scene-enter', sceneEnter);
-  document.addEventListener('avantage:scene-release', sceneRelease);
-  const scenes = window.AvantageScenes?.create(document, { video });
-  if (scenes) window.AvantageScenes.instance = scenes;
   function pump() {
-    if (disposed || sceneOwned || !Number.isFinite(video.duration)) return;
+    if (disposed || !Number.isFinite(video.duration)) return;
     if (mobile.matches && !motion.matches) continueMobilePlayback();
     else seeker.set(Math.min(maximum(), target));
   }
@@ -74,7 +57,7 @@
   function render() {
     content?.update(state.progress);
     if (!dragging) slider.value = String(Math.round(state.progress * 1000));
-    if (sceneOwned || !Number.isFinite(video.duration)) return;
+    if (!Number.isFinite(video.duration)) return;
     target = Math.min(maximum(), CinematicStory.sample(state.progress).time);
     if (mobile.matches) { stars?.update(target); billboards?.update(target); }
     time.textContent = `${target.toFixed(1)} / ${video.duration.toFixed(1)} s`;
@@ -82,12 +65,7 @@
     pump();
   }
   function configure() {
-    if (disposed) return;
     timeline?.scrollTrigger?.kill(true); timeline?.kill(); timeline = undefined;
-    // Motion changes must remove the old pin even while a scene borrows the video.
-    // Rebuild only after the original hero media and decoder regain ownership.
-    if (sceneOwned) { heroConfigured = false; return; }
-    heroConfigured = true; heroPreferences = preferenceKey();
     // Keep decoded HD detail; the CSS crop controls presentation only.
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
@@ -100,20 +78,14 @@
     } else document.querySelector('#instruction').textContent = 'Explore the story';
     render();
   }
-  function heroMetadata() {
-    if (disposed || sceneOwned) return;
-    if (!heroConfigured || heroPreferences !== preferenceKey()) { configure(); return; }
-    // Restoring the same hero media must not rebuild its pin or reset its timeline.
-    canvas.width = video.videoWidth; canvas.height = video.videoHeight; presented = -1; render();
-  }
-  function decoded() { if (sceneOwned) return; clearTimeout(stallTimer); stallTimer = undefined; pump(); }
+  function decoded() { clearTimeout(stallTimer); stallTimer = undefined; pump(); }
   let primed = false;
   function pauseAutoplay() {
-    if (scrollPlayback || sceneOwned) return;
+    if (scrollPlayback) return;
     video.pause(); primed = true; pump();
   }
   function primeMobileVideo() {
-    if (sceneOwned || !mobile.matches || primed || video.readyState < 1) return;
+    if (!mobile.matches || primed || video.readyState < 1) return;
     const attempt = video.play();
     if (attempt?.catch) attempt.catch(() => {});
   }
@@ -128,7 +100,7 @@
       timeline.progress(progress);
     } else { state.progress = progress; render(); }
   }
-  function error() { if (!sceneOwned) notice.textContent = 'The background video could not load. You can still explore our story with the slider.'; }
+  function error() { notice.textContent = 'The background video could not load. You can still explore our story with the slider.'; }
   function jump(id) {
     if (id === 'brief' || id === 'callback') {
       const section = document.getElementById(id);
@@ -148,7 +120,7 @@
   document.querySelector('header').addEventListener('click',navigation);
   function beginDrag() { dragging = true; }
   function endDrag() { requestAnimationFrame(() => { dragging = false; }); }
-  video.addEventListener('loadedmetadata', heroMetadata);
+  video.addEventListener('loadedmetadata', configure, {once:true});
   video.addEventListener('loadeddata', decoded);
   video.addEventListener('seeked', decoded);
   video.addEventListener('playing', pauseAutoplay);
@@ -156,6 +128,7 @@
   addEventListener('touchstart', primeMobileVideo, {passive:true});
   // Cached local media can finish metadata loading before deferred scripts run.
   if (video.readyState >= 1) {
+    video.removeEventListener('loadedmetadata', configure);
     configure();
   }
   slider.addEventListener('input', move);
@@ -166,9 +139,7 @@
   addEventListener('pagehide', event => {
     video.pause(); clearTimeout(stallTimer); clearTimeout(mobileSettleTimer);
     if (event.persisted) return;
-    disposed = true; scenes?.destroy(); seeker.dispose(); stars?.dispose(); billboards?.dispose(); content?.dispose(); timeline?.scrollTrigger?.kill(); timeline?.kill();
-    document.removeEventListener('avantage:scene-enter', sceneEnter);
-    document.removeEventListener('avantage:scene-release', sceneRelease);
+    disposed = true; seeker.dispose(); stars?.dispose(); billboards?.dispose(); content?.dispose(); timeline?.scrollTrigger?.kill(); timeline?.kill();
     document.querySelector('header').removeEventListener('click',navigation);
     motion.removeEventListener('change', configure);
     slider.removeEventListener('input', move);
@@ -177,6 +148,5 @@
     removeEventListener('pointerup', endDrag);
     removeEventListener('pointercancel', endDrag);
     video.removeEventListener('loadeddata', decoded); video.removeEventListener('seeked', decoded); video.removeEventListener('playing', pauseAutoplay);
-    video.removeEventListener('loadedmetadata', heroMetadata); video.removeEventListener('error', error);
   });
 })();

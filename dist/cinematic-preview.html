@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Avantage AI — The Connected Systems Edition</title>
+  <title>Avantage AI — Your business. Running smarter.</title>
   <style>
     *{box-sizing:border-box}html,body{margin:0;background:#14171b;color:#f4f1eb;font-family:Arial,sans-serif}a{color:inherit;text-decoration:none}a:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:6px}
     .stage{position:relative;height:100svh;overflow:hidden;background:#14171b url('assets/cinematic-v2/poster-hd.jpg') center/cover}.stage video,.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.stage video{opacity:0;pointer-events:none}.stage canvas{visibility:hidden}.stage .cinematic-stars{visibility:visible;pointer-events:none}
@@ -10,272 +10,19 @@
     .controls{position:absolute;bottom:0;left:0;right:0;padding:35px 4vw 22px;background:linear-gradient(transparent,#14171bcc);display:grid;gap:12px}.labels{display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.03em}input{width:100%;accent-color:#ece5d9;cursor:pointer}footer{padding:50px 4vw;text-align:center;font-size:14px}footer a{text-decoration:underline}#notice{font-size:12px;margin:0;color:#dfd9ce}
     @media(max-width:600px){header{padding:20px}header strong{font-size:20px}.controls{padding:28px 20px 20px}.labels{font-size:11px}}
   </style>
-  <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7"><link rel="stylesheet" href="connected-systems.css"><link rel="stylesheet" href="cinematic-scenes.css">
-  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-scenes.js"></script><script defer src="cinematic-preview.js?v=13"></script><script defer src="chapter-navigation.js"></script><script defer src="system-map.js"></script><script defer src="capability-chapters.js"></script><script defer src="system-transformation.js"></script><script defer src="case-studies.js"></script><script defer src="system-builder.js"></script><script defer src="connected-systems.js"></script>
+  <link rel="stylesheet" href="vendor/lenis.css"><link rel="stylesheet" href="cinematic-content.css?v=7">
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script><script defer src="vendor/lenis.min.js"></script><script defer src="smooth-scroll.js?v=2"></script><script defer src="cinematic-time.js"></script><script defer src="cinematic-stars.js?v=1"></script><script defer src="cinematic-story.js?v=4"></script><script defer src="cinematic-content.js?v=6"></script><script defer src="cinematic-billboards.js?v=1"></script><script defer src="cinematic-preview.js?v=12"></script>
 </head>
 <body>
-  <a class="systems-skip" href="#connected-systems-main">Skip to the Connected Systems Edition</a>
-  <h1 class="sr-only">Avantage AI — The Connected Systems Edition</h1>
-
+  <main>
     <section class="stage" data-cinematic aria-label="Avantage cinematic video preview">
-      <video id="journey" muted playsinline autoplay preload="auto" poster="assets/cinematic-v2/poster-hd.jpg" aria-hidden="true">
+      <video id="journey" muted playsinline autoplay preload="auto" poster="assets/cinematic-v2/poster-hd.jpg" aria-label="Mountain, robot project gallery, architecture and galaxy">
         <source media="(max-width: 800px)" src="assets/cinematic-v2/avantage-journey-mobile.mp4?v=2" type="video/mp4">
         <source src="assets/cinematic-v2/avantage-journey-web.mp4" type="video/mp4">
       </video>
       <canvas id="picture" width="1920" height="1080" aria-hidden="true"></canvas>
       <header><button class="brand-home" data-jump="intro" aria-label="Back to the beginning"><strong>Avantage. AI</strong></button><nav aria-label="Main navigation"><button data-jump="project-0">Our work</button><button class="strategy-link" data-jump="callback">Book a free strategy call ↗</button></nav></header>
       <div class="controls"><div class="labels"><span id="instruction">Explore the story</span><span id="chapter-label"></span><output id="time" aria-hidden="true"></output></div><input id="position" type="range" min="0" max="1000" value="0" aria-label="Story position"><p id="notice" role="status">Loading the cinematic preview…</p></div>
-    </section>
-  <main class="connected-systems-main" id="connected-systems-main" tabindex="-1" aria-label="The Connected Systems Edition">
-    <div class="chapter-transition" data-scene="intro" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-    <nav class="edition-navigation" data-chapter-nav aria-label="Edition chapters">
-      <div class="edition-navigation-row" data-lenis-prevent>
-        <a href="#system-overview">Overview</a>
-        <a href="#ai-agents">AI Agents</a>
-        <a href="#automations">Automations</a>
-        <a href="#custom-software">Custom Software</a>
-        <a href="#data-insights">Data &amp; Insights</a>
-        <a href="#creative-ai">Creative AI</a>
-        <a href="#our-work">Our Work</a>
-      </div>
-    </nav>
-    <section class="edition-chapter edition-overview" id="system-overview" aria-labelledby="system-overview-title" tabindex="-1">
-      <div class="systems-container">
-        <p class="edition-marker">Systems 2026</p>
-        <p class="chapter-label">Avantage AI — The Connected Systems Edition</p>
-        <h2 id="system-overview-title">Every part of your business. Working as one.</h2>
-        <p>Your business already has the moving parts. We make them work as one.</p>
-        <p class="systems-brand-statement">Business runs better by design.</p>
-        <div class="system-map" data-system-map role="group" aria-label="Explore the Avantage operating system">
-          <div class="system-map-hub"><span class="system-map-hub-label">Avantage<span class="system-map-brand-dot">.</span> AI</span><span>Operating system</span><span class="system-map-hub-note">One connected business.</span></div>
-          <svg class="system-map-connections" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path data-system-path="think" d="M500 300 C360 300 390 100 170 100" pathLength="100"/>
-            <path data-system-path="connect" d="M500 300 L170 300" pathLength="100"/>
-            <path data-system-path="automate" d="M500 300 C360 300 390 500 170 500" pathLength="100"/>
-            <path data-system-path="build" d="M500 300 C640 300 610 100 830 100" pathLength="100"/>
-            <path data-system-path="understand" d="M500 300 L830 300" pathLength="100"/>
-            <path data-system-path="create" d="M500 300 C640 300 610 500 830 500" pathLength="100"/>
-          </svg>
-          <a class="system-map-node" href="#ai-agents" data-system-node="think"><span class="system-map-number">01</span><strong>Think</strong><span>Agents with business context.</span></a>
-          <a class="system-map-node" href="#automations" data-system-node="connect"><span class="system-map-number">02</span><strong>Connect</strong><span>Tools that share the work.</span></a>
-          <a class="system-map-node" href="#automations" data-system-node="automate"><span class="system-map-number">03</span><strong>Automate</strong><span>Reliable everyday workflows.</span></a>
-          <a class="system-map-node" href="#custom-software" data-system-node="build"><span class="system-map-number">04</span><strong>Build</strong><span>Software shaped around you.</span></a>
-          <a class="system-map-node" href="#data-insights" data-system-node="understand"><span class="system-map-number">05</span><strong>Understand</strong><span>Evidence for every decision.</span></a>
-          <a class="system-map-node" href="#creative-ai" data-system-node="create"><span class="system-map-number">06</span><strong>Create</strong><span>A repeatable creative process.</span></a>
-        </div>
-      </div>
-    </section>
-    <section class="edition-chapter" id="ai-agents" aria-labelledby="ai-agents-title" tabindex="-1">
-      <div class="chapter-transition" data-scene="agents" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-      <div class="systems-container">
-        <p class="chapter-label">01 / AI Agents</p>
-        <h2 id="ai-agents-title">A team that can think, act, and report.</h2>
-        <p>Connect customer support, lead qualification, research, and reporting around your business context.</p>
-        <figure class="edition-feature agents-feature" aria-labelledby="agents-demo-title">
-          <figcaption><span class="feature-brand">Avantage. AI</span><span class="feature-note">System preview / shared context</span><h3 id="agents-demo-title">One brief. A coordinated team.</h3><p>Give each agent a clear role, shared knowledge and a route back to your team.</p></figcaption>
-          <div class="agent-workspace">
-            <div class="agent-context"><span class="interface-label">Shared business context</span><strong>Your knowledge. Your rules.</strong><ul><li>Approved product information</li><li>Customer history</li><li>Escalation and approval rules</li></ul></div>
-            <ol class="agent-tasks"><li><span class="interface-label">Support agent</span><strong>Find the relevant answer</strong><span>Uses approved knowledge and cites the source.</span></li><li><span class="interface-label">Research agent</span><strong>Bring the missing context</strong><span>Prepares account notes for the next conversation.</span></li><li><span class="interface-label">Reporting agent</span><strong>Return a useful handoff</strong><span>Summarises the request, action and open questions.</span></li></ol>
-            <div class="agent-review"><span class="interface-label">Human checkpoint</span><strong>Exceptions return to your team.</strong><span>Review sensitive requests before an action is taken.</span></div>
-          </div>
-        </figure>
-        <div class="capability-grid">
-          <article class="capability-card"><span class="capability-index">01.1</span><h3>Support with context</h3><p>Answer recurring questions from approved sources, with a clear path to a person.</p></article>
-          <article class="capability-card"><span class="capability-index">01.2</span><h3>Lead qualification</h3><p>Gather the details your sales team needs before the first conversation.</p></article>
-          <article class="capability-card"><span class="capability-index">01.3</span><h3>Internal knowledge</h3><p>Help teams find policies, process notes and useful answers in one place.</p></article>
-        </div>
-        <svg class="chapter-connections" viewBox="0 0 900 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M150 0 V20 Q150 30 160 30 H740 Q750 30 750 20 V0 M450 0 V60"/></svg>
-        <div class="chapter-scenario"><h3>In practice</h3><p>A customer asks about an order. An agent checks approved information, drafts a reply and sends an exception to the account owner with the conversation attached.</p><a class="systems-action" href="#callback">Plan your AI team ↗</a></div>
-        <div class="chapter-handoff"><span>Intelligence finds its next action.</span><a href="#automations">Next / Automations →</a></div>
-      </div>
-    </section>
-    <section class="edition-chapter" id="automations" aria-labelledby="automations-title" tabindex="-1">
-      <div class="chapter-transition" data-scene="automations" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-      <div class="systems-container">
-        <p class="chapter-label">02 / Automations</p>
-        <h2 id="automations-title">From repetitive work to reliable systems.</h2>
-        <p>Bring lead capture, qualification, CRM updates, follow-up, and reporting into one connected workflow.</p>
-        <figure class="edition-feature automation-feature" aria-labelledby="automations-demo-title">
-          <figcaption><span class="feature-brand">Avantage. AI</span><span class="feature-note">System preview / connected workflow</span><h3 id="automations-demo-title">Every handoff has a next step.</h3><p>A connected path replaces the copy, paste and chase between separate tools.</p></figcaption>
-          <div class="workflow-before"><span class="interface-label">Manual handoffs</span><span>Inbox notes / spreadsheet updates / reminder lists</span></div>
-          <ol class="automation-flow" aria-label="Lead to report workflow"><li><span class="flow-step">01</span><strong>Lead</strong><span>Capture the enquiry</span></li><li><span class="flow-step">02</span><strong>Qualification</strong><span>Check fit and needs</span></li><li><span class="flow-step">03</span><strong>CRM</strong><span>Update the record</span></li><li><span class="flow-step">04</span><strong>Follow-up</strong><span>Route the next action</span></li><li><span class="flow-step">05</span><strong>Report</strong><span>Summarise progress</span></li></ol>
-          <div class="workflow-checkpoint"><strong>Built around the exceptions, too.</strong><span>Missing details enter a review queue. Approved work moves into delivery with an owner and a record.</span></div>
-        </figure>
-        <div class="capability-grid">
-          <article class="capability-card"><span class="capability-index">02.1</span><h3>Connected tools</h3><p>Pass the right information between the systems your team already uses.</p></article>
-          <article class="capability-card"><span class="capability-index">02.2</span><h3>Reliable follow-up</h3><p>Trigger reminders and next steps from real changes in the workflow.</p></article>
-          <article class="capability-card"><span class="capability-index">02.3</span><h3>Delivery &amp; reporting</h3><p>Assign work, surface exceptions and keep a traceable record of what happened.</p></article>
-        </div>
-        <svg class="chapter-connections" viewBox="0 0 900 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M150 0 V20 Q150 30 160 30 H740 Q750 30 750 20 V0 M450 0 V60"/></svg>
-        <div class="chapter-scenario"><h3>In practice</h3><p>A website enquiry becomes a qualified CRM record. The right owner receives the next action, while incomplete requests wait for review and the team receives a progress summary.</p><a class="systems-action" href="#callback">Map your first workflow ↗</a></div>
-        <div class="chapter-handoff"><span>Connected work needs a place to happen.</span><a href="#custom-software">Next / Custom Software →</a></div>
-      </div>
-    </section>
-    <section class="edition-chapter" id="custom-software" aria-labelledby="custom-software-title" tabindex="-1">
-      <div class="chapter-transition" data-scene="software" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-      <div class="systems-container">
-        <p class="chapter-label">03 / Custom Software</p>
-        <h2 id="custom-software-title">Software shaped around the business.</h2>
-        <p>Design operations dashboards, client portals, and internal tools around how your team works.</p>
-        <figure class="edition-feature software-feature" aria-labelledby="software-demo-title">
-          <figcaption><span class="feature-brand">Avantage. AI</span><span class="feature-note">Interface concept / operations workspace</span><h3 id="software-demo-title">The right view for every role.</h3><p>A shared foundation connects your operations team, customers and decision makers.</p></figcaption>
-          <div class="software-workspace">
-            <div class="workspace-sidebar"><span class="interface-label">Workspace views</span><span class="workspace-current">Operations</span><span>Client portal</span><span>Team tools</span><span>Analytics</span></div>
-            <div class="workspace-main"><div class="workspace-heading"><strong>Delivery board</strong><span>Illustrative workflow</span></div><div class="delivery-board"><div><span class="interface-label">Intake</span><p>New service request<small>Owner / Operations</small></p></div><div><span class="interface-label">In progress</span><p>Prepare delivery brief<small>Owner / Project team</small></p></div><div><span class="interface-label">Review</span><p>Client approval<small>Owner / Account lead</small></p></div></div><div class="portal-preview"><span class="interface-label">Client portal</span><strong>One place for files, status and approvals.</strong></div></div>
-          </div>
-        </figure>
-        <div class="capability-grid">
-          <article class="capability-card"><span class="capability-index">03.1</span><h3>Operations dashboards</h3><p>Bring priorities, work queues and ownership into a view your team can act on.</p></article>
-          <article class="capability-card"><span class="capability-index">03.2</span><h3>Client portals</h3><p>Give customers a clear place to share information, review work and follow progress.</p></article>
-          <article class="capability-card"><span class="capability-index">03.3</span><h3>Internal tools</h3><p>Replace awkward workarounds with purpose-built screens and connected analytics.</p></article>
-        </div>
-        <svg class="chapter-connections" viewBox="0 0 900 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M150 0 V20 Q150 30 160 30 H740 Q750 30 750 20 V0 M450 0 V60"/></svg>
-        <div class="chapter-scenario"><h3>In practice</h3><p>A services team manages delivery on an internal board. Customers see the relevant milestones in their portal and send approvals back to the same project record.</p><a class="systems-action" href="#brief">Shape your software brief ↗</a></div>
-        <div class="chapter-handoff"><span>Every action becomes useful information.</span><a href="#data-insights">Next / Data &amp; Insights →</a></div>
-      </div>
-    </section>
-    <section class="edition-chapter" id="data-insights" aria-labelledby="data-insights-title" tabindex="-1">
-      <div class="chapter-transition" data-scene="insights" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-      <div class="systems-container">
-        <p class="chapter-label">04 / Data &amp; Insights</p>
-        <h2 id="data-insights-title">Decisions arrive with the evidence.</h2>
-        <p>Connect your information sources to custom reporting, live dashboards, and automated business summaries.</p>
-        <figure class="edition-feature insights-feature" aria-labelledby="insights-demo-title">
-          <figcaption><span class="feature-brand">Avantage. AI</span><span class="feature-note">Data-flow concept / evidence to action</span><h3 id="insights-demo-title">One picture, with the sources attached.</h3><p>Bring separate records into a reporting layer with shared definitions and visible gaps.</p></figcaption>
-          <div class="insights-workspace"><ul class="data-sources"><li><span class="interface-label">Sales</span><strong>CRM activity</strong></li><li><span class="interface-label">Delivery</span><strong>Project records</strong></li><li><span class="interface-label">Finance</span><strong>Approved accounts</strong></li></ul><div class="data-layer"><span class="interface-label">Unified reporting layer</span><strong>Connect. Check. Explain.</strong><span>Shared definitions<br>Source references<br>Freshness checks</span></div><div class="insight-summary"><span class="interface-label">Example business summary</span><strong>What needs attention?</strong><ul><li>Follow up on open opportunities.</li><li>Review delivery items awaiting approval.</li><li>Confirm missing finance inputs.</li></ul><span class="insight-source">Every observation links back to its record.</span></div></div>
-        </figure>
-        <div class="capability-grid">
-          <article class="capability-card"><span class="capability-index">04.1</span><h3>Reporting that fits</h3><p>Define measures around your business and trace them to the underlying information.</p></article>
-          <article class="capability-card"><span class="capability-index">04.2</span><h3>Live dashboards</h3><p>Keep the team aligned with useful views and clear signals when a source is out of date.</p></article>
-          <article class="capability-card"><span class="capability-index">04.3</span><h3>Forecasts &amp; summaries</h3><p>Explore assumptions, see uncertainty and receive a concise account of what changed.</p></article>
-        </div>
-        <svg class="chapter-connections" viewBox="0 0 900 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M150 0 V20 Q150 30 160 30 H740 Q750 30 750 20 V0 M450 0 V60"/></svg>
-        <div class="chapter-scenario"><h3>In practice</h3><p>Before the weekly review, a manager receives a summary across sales and delivery. Each item links to its source, and missing inputs are flagged for the team to resolve.</p><a class="systems-action" href="#callback">Connect your business picture ↗</a></div>
-        <div class="chapter-handoff"><span>Clear insight gives the next idea direction.</span><a href="#creative-ai">Next / Creative AI →</a></div>
-      </div>
-    </section>
-    <section class="edition-chapter" id="creative-ai" aria-labelledby="creative-ai-title" tabindex="-1">
-      <div class="chapter-transition" data-scene="creative" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-      <div class="systems-container">
-        <p class="chapter-label">05 / Creative AI</p>
-        <h2 id="creative-ai-title">A production system for every campaign.</h2>
-        <p>Bring image, video, campaign content, and brand assets into a repeatable production workflow.</p>
-        <figure class="edition-feature creative-feature" aria-labelledby="creative-demo-title">
-          <figcaption><span class="feature-brand">Avantage. AI</span><span class="feature-note">Studio concept / campaign production</span><h3 id="creative-demo-title">One direction. A complete campaign.</h3><p>Keep the brief, visual direction and review process connected from first concept to final asset.</p></figcaption>
-          <div class="creative-workspace"><div class="studio-direction"><span class="interface-label">Creative direction</span><strong>A quieter kind of launch.</strong><span>Product study / sculpted light / natural materials</span><div class="studio-palette"><span>Ink</span><span>Stone</span><span>Signal</span></div></div><div class="studio-output"><svg class="studio-art" viewBox="0 0 480 320" aria-hidden="true" focusable="false"><defs><linearGradient id="studio-surface" x2="1" y2="1"><stop stop-color="#50594b"/><stop offset="1" stop-color="#161c18"/></linearGradient><radialGradient id="studio-light"><stop stop-color="#d5f970" stop-opacity=".45"/><stop offset="1" stop-color="#d5f970" stop-opacity="0"/></radialGradient></defs><rect width="480" height="320" fill="#161b17"/><ellipse cx="270" cy="135" rx="220" ry="170" fill="url(#studio-light)"/><ellipse cx="240" cy="265" rx="140" ry="16" fill="#0b100d"/><path d="M144 248V120L240 65L336 120V248Z" fill="url(#studio-surface)" stroke="#d5f970" stroke-opacity=".4"/><path d="M144 120L240 175L336 120M240 175V285" fill="none" stroke="#d5f970" stroke-opacity=".55"/><circle cx="240" cy="142" r="38" fill="#d5f970" fill-opacity=".12" stroke="#d5f970" stroke-opacity=".7"/></svg><div class="studio-caption"><strong>Campaign visual study</strong><span>Original Avantage concept</span></div></div><ol class="studio-process"><li><span>01 / Brief</span><strong>Set the direction</strong></li><li><span>02 / Produce</span><strong>Images, film &amp; copy</strong></li><li><span>03 / Review</span><strong>Approve the details</strong></li><li><span>04 / Deliver</span><strong>Prepare every format</strong></li></ol></div>
-        </figure>
-        <div class="capability-grid">
-          <article class="capability-card"><span class="capability-index">05.1</span><h3>Image &amp; video</h3><p>Develop a consistent visual direction across product imagery, motion and campaign stories.</p></article>
-          <article class="capability-card"><span class="capability-index">05.2</span><h3>Campaign content</h3><p>Turn an approved brief into coordinated assets for each channel and audience.</p></article>
-          <article class="capability-card"><span class="capability-index">05.3</span><h3>Brand asset systems</h3><p>Build reusable direction, review steps and organised deliverables for the next campaign.</p></article>
-        </div>
-        <svg class="chapter-connections" viewBox="0 0 900 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M150 0 V20 Q150 30 160 30 H740 Q750 30 750 20 V0 M450 0 V60"/></svg>
-        <div class="chapter-scenario"><h3>In practice</h3><p>A product launch begins with one approved direction. The studio develops image concepts, a short film and channel variations, then brings the team together for review before delivery.</p><a class="systems-action" href="#brief">Plan your creative system ↗</a></div>
-        <div class="chapter-handoff"><span>See how the parts come together.</span><a href="#our-work">Next / Our Work →</a></div>
-      </div>
-    </section>
-    <section class="edition-chapter system-transformation" id="system-transformation" aria-labelledby="system-transformation-title" tabindex="-1">
-      <div class="systems-container" data-transformation data-transformation-scroll>
-        <p class="chapter-label">The connected difference</p>
-        <h2 id="system-transformation-title">From moving parts to a working system.</h2>
-        <p>See how a fragmented operating model can become connected business work.</p>
-        <div class="transformation-visual">
-          <svg class="transformation-diagram" viewBox="0 0 1000 280" aria-hidden="true" focusable="false">
-            <g class="transformation-fragmented"><path d="M90 80H210 M280 185H390 M470 70H570 M640 200H730 M820 95H920"/><rect x="55" y="55" width="70" height="50" rx="6"/><rect x="245" y="160" width="70" height="50" rx="6"/><rect x="435" y="45" width="70" height="50" rx="6"/><rect x="605" y="175" width="70" height="50" rx="6"/><rect x="785" y="70" width="70" height="50" rx="6"/><circle cx="925" cy="175" r="15"/><circle cx="180" cy="225" r="9"/><circle cx="355" cy="60" r="12"/></g>
-            <g class="transformation-connected"><rect width="1000" height="280" fill="#1c261a" stroke="none"/><path d="M90 140H910 M90 80V200 M280 80V200 M470 80V200 M660 80V200 M850 80V200"/><rect x="55" y="55" width="70" height="50" rx="6"/><rect x="245" y="175" width="70" height="50" rx="6"/><rect x="435" y="55" width="70" height="50" rx="6"/><rect x="625" y="175" width="70" height="50" rx="6"/><rect x="815" y="55" width="70" height="50" rx="6"/><circle cx="90" cy="140" r="7"/><circle cx="280" cy="140" r="7"/><circle cx="470" cy="140" r="7"/><circle cx="660" cy="140" r="7"/><circle cx="850" cy="140" r="7"/></g>
-          </svg>
-          <div class="transformation-reveal" aria-hidden="true"></div>
-        </div>
-        <div class="transformation-controls" data-transformation-controls hidden>
-          <label for="transformation-position">Explore the connected view</label>
-          <input id="transformation-position" data-transformation-range type="range" min="0" max="100" step="1" value="50" aria-describedby="transformation-help">
-          <p id="transformation-help">Drag or use the arrow keys to move the diagram reveal. The complete before and after comparison stays below.</p>
-        </div>
-        <dl class="transformation-pairs">
-          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Manual handoffs</dt><dd><span class="transformation-state">After</span>Automated workflows</dd></div>
-          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Disconnected tools</dt><dd><span class="transformation-state">After</span>Connected systems</dd></div>
-          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Slow reporting</dt><dd><span class="transformation-state">After</span>Live intelligence</dd></div>
-          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Generic AI usage</dt><dd><span class="transformation-state">After</span>Company-specific AI</dd></div>
-          <div class="transformation-pair"><dt><span class="transformation-state">Before</span>Information chasing</dt><dd><span class="transformation-state">After</span>Proactive information delivery</dd></div>
-        </dl>
-      </div>
-    </section>
-    <section class="edition-chapter" id="our-work" aria-labelledby="our-work-title" tabindex="-1">
-      <div class="chapter-transition" data-scene="work" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-      <div class="systems-container">
-        <p class="chapter-label">06 / Our Work</p>
-        <h2 id="our-work-title">Connected systems. Real business work.</h2>
-        <p>Explore Avantage systems for travel, steel operations, and manufacturing.</p>
-        <div class="case-studies" data-case-studies>
-          <div class="case-grid">
-            <article class="case-card">
-              <div class="case-image"><img src="assets/project-btp.webp" alt="BTP Travel CRM dashboard and branch overview" width="1905" height="992" loading="lazy" decoding="async"></div>
-              <div class="case-card-copy"><p class="case-category">Work / 01 · Travel</p><h3>BTP Travel CRM</h3><p>Inquiries, bookings and accounting in one travel system.</p><a class="case-story-link" href="#case-btp-travel-crm" data-case-open="btp-travel-crm">Explore the system ↗</a><a class="case-project-link" href="projects/btp-travel-crm.html">Project page →</a></div>
-            </article>
-            <article class="case-card">
-              <div class="case-image"><img src="assets/project-harshad.webp" alt="Harshad Steel ERP inventory interface" width="1920" height="991" loading="lazy" decoding="async"></div>
-              <div class="case-card-copy"><p class="case-category">Work / 02 · Steel &amp; hardware</p><h3>Harshad Steel ERP</h3><p>Inventory, billing and cash across the operation.</p><a class="case-story-link" href="#case-harshad-steel-erp" data-case-open="harshad-steel-erp">Explore the system ↗</a><a class="case-project-link" href="projects/harshad-steel-erp.html">Project page →</a></div>
-            </article>
-            <article class="case-card">
-              <div class="case-image"><img src="assets/project-vrc.webp" alt="VRC Plasto PLM lifecycle stages and product documentation" width="1906" height="991" loading="lazy" decoding="async"></div>
-              <div class="case-card-copy"><p class="case-category">Work / 03 · Manufacturing</p><h3>VRC Plasto PLM</h3><p>A digital lifecycle from RFQ to SOP handover.</p><a class="case-story-link" href="#case-vrc-plasto-plm" data-case-open="vrc-plasto-plm">Explore the system ↗</a><a class="case-project-link" href="projects/vrc-plasto-plm.html">Project page →</a></div>
-            </article>
-          </div>
-          <div class="case-details">
-            <article class="case-panel" id="case-btp-travel-crm" data-case-panel="btp-travel-crm" aria-labelledby="case-btp-title" tabindex="-1">
-              <div class="case-panel-heading"><div><p class="case-category">Bharat Travel Point / CRM &amp; accounting</p><h3 id="case-btp-title">The travel operation, together.</h3></div><button class="case-close" data-case-close type="button" aria-label="Close BTP Travel CRM story">Close ×</button></div>
-              <div class="case-story"><div><h4>Friction</h4><p>Inquiries, bookings, customers, branches and payments need to be managed together.</p></div><div><h4>Connected solution</h4><p>A custom travel CRM and accounting system for Bharat Travel Point, including marketing channel performance.</p></div><div><h4>Outcome</h4><p>One system unifying inquiries, bookings, customers, branches, payments and marketing channel performance.</p></div></div>
-              <a class="systems-text-action" href="projects/btp-travel-crm.html">Read the BTP Travel CRM project →</a>
-            </article>
-            <article class="case-panel" id="case-harshad-steel-erp" data-case-panel="harshad-steel-erp" aria-labelledby="case-harshad-title" tabindex="-1">
-              <div class="case-panel-heading"><div><p class="case-category">Harshad Steel / Bhavana Hardware · ERP</p><h3 id="case-harshad-title">A system for the steel operation.</h3></div><button class="case-close" data-case-close type="button" aria-label="Close Harshad Steel ERP story">Close ×</button></div>
-              <div class="case-story"><div><h4>Friction</h4><p>Inventory, sales bills, purchase bills and cash are part of the same steel and hardware operation.</p></div><div><h4>Connected solution</h4><p>A custom ERP for Harshad Steel / Bhavana Hardware covering stock, billing, customers and suppliers.</p></div><div><h4>Outcome</h4><p>Inventory, sales bills, purchase bills, cash, customers and suppliers covered by one ERP, with roles and audit logs.</p></div></div>
-              <a class="systems-text-action" href="projects/harshad-steel-erp.html">Read the Harshad Steel ERP project →</a>
-            </article>
-            <article class="case-panel" id="case-vrc-plasto-plm" data-case-panel="vrc-plasto-plm" aria-labelledby="case-vrc-title" tabindex="-1">
-              <div class="case-panel-heading"><div><p class="case-category">VRC Plasto Mould / Manufacturing PLM</p><h3 id="case-vrc-title">From first RFQ to handover.</h3></div><button class="case-close" data-case-close type="button" aria-label="Close VRC Plasto PLM story">Close ×</button></div>
-              <div class="case-story"><div><h4>Friction</h4><p>Plastic parts manufacturing moves through RFQ, feasibility, quotation, APQP, trials, PPAP and SOP handover.</p></div><div><h4>Connected solution</h4><p>A product lifecycle management system for VRC Plasto Mould covering those manufacturing stages.</p></div><div><h4>Outcome</h4><p>The product lifecycle digitised from RFQ through feasibility, quotation, APQP, trials and PPAP to SOP handover.</p></div></div>
-              <a class="systems-text-action" href="projects/vrc-plasto-plm.html">Read the VRC Plasto PLM project →</a>
-            </article>
-          </div>
-          <a class="systems-text-action case-all-work" href="works.html#projects">Explore all Avantage projects →</a>
-        </div>
-      </div>
-    </section>
-    <section class="edition-chapter system-builder" id="build-your-system" aria-labelledby="system-builder-title" tabindex="-1">
-      <div class="systems-container" data-system-builder>
-        <p class="chapter-label">Build Your System</p>
-        <h2 id="system-builder-title">Build your system.</h2>
-        <p>Start with the work you want to improve. Choose your needs to see a suggested combination, then bring it into your project brief.</p>
-        <div class="builder-layout">
-          <fieldset class="builder-problems" data-builder-problems disabled>
-            <legend>What’s slowing your business down?</legend>
-            <label><input type="checkbox" name="system-problems" value="manual-work"><span>Too much manual work</span></label>
-            <label><input type="checkbox" name="system-problems" value="disconnected-tools"><span>Disconnected tools</span></label>
-            <label><input type="checkbox" name="system-problems" value="slow-support"><span>Slow customer support</span></label>
-            <label><input type="checkbox" name="system-problems" value="poor-reporting"><span>Poor reporting</span></label>
-            <label><input type="checkbox" name="system-problems" value="custom-software"><span>Need custom software</span></label>
-            <label><input type="checkbox" name="system-problems" value="content-workflow"><span>Need an AI content workflow</span></label>
-          </fieldset>
-          <div class="builder-recommendation" role="region" aria-labelledby="builder-result-label" aria-live="polite" aria-atomic="true">
-            <p class="chapter-label" id="builder-result-label">Suggested system</p>
-            <h3 data-builder-title>Your system starts with your needs.</h3>
-            <ul class="builder-components" data-builder-components><li>Workflow Automation</li><li>Custom Software</li><li>Analytics Dashboard</li></ul>
-            <p data-builder-summary>We can connect automation, software and reporting around your business. Tell us which parts matter in your brief.</p>
-          </div>
-        </div>
-        <div class="systems-actions"><a class="systems-action" href="#brief" data-builder-continue>Design this system with us</a><button class="systems-text-action builder-reset" type="button" data-builder-reset hidden>Reset choices</button></div>
-        <noscript><p>Describe any of these needs in the project brief. We’ll help you choose a useful starting system.</p></noscript>
-      </div>
-    </section>
-    <section class="edition-chapter systems-finale" id="systems-finale" aria-labelledby="systems-finale-title" tabindex="-1">
-      <div class="chapter-transition" data-scene="finale" role="presentation"><img class="scene-poster" src="assets/cinematic-v2/connected-intro-poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"></div>
-      <div class="systems-container">
-        <p class="chapter-label">Your next system</p>
-        <h2 id="systems-finale-title">Your business already has the moving parts. We make them work as one.</h2>
-        <p>Start with the work that matters to your business.</p>
-        <div class="systems-actions"><a class="systems-action" href="#callback">Design my system</a><a class="systems-text-action" href="#our-work">Explore our work</a></div>
-      </div>
     </section>
   </main>
   <section class="brief-section callback-section" id="callback" aria-labelledby="callback-title" tabindex="-1">
@@ -295,8 +42,8 @@
     <div class="brief-heading"><p class="brief-label">YOUR NEXT CHAPTER</p><h2 id="brief-title">Let’s build your <em>advantage.</em></h2></div>
     <div class="brief-grid">
       <aside class="brief-details" aria-label="Contact details">
-        <div><p class="brief-label">EMAIL</p><p class="brief-contact"><a href="mailto:contact@avantageai.com">contact@avantageai.com</a></p></div>
-        <div><p class="brief-label">PHONE</p><p class="brief-contact"><a href="tel:+919270856871">+91 92708 56871</a></p></div>
+        <div><p class="brief-label">EMAIL</p><p class="brief-contact">contact@avantageai.com</p></div>
+        <div><p class="brief-label">PHONE</p><p class="brief-contact">+91 92708 56871</p></div>
         <div><p class="brief-label">STUDIO</p><p>Sumit Apartments, 493<br>Professor’s Colony, Hanuman Nagar<br>Nagpur, Maharashtra 440024</p></div>
         <p class="brief-note">Tell us what’s slowing you down.<br>We’ll start with what matters to your business.</p>
       </aside>
