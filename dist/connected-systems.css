@@ -1,0 +1,50 @@
+/* Shared edition foundations. Chapters stay in normal document flow. */
+.connected-systems-main {
+  --systems-bg: #14171b;
+  --systems-panel: #1e242a;
+  --systems-paper: #f4f1eb;
+  --systems-muted: #bbc2c8;
+  --systems-signal: #d5f970;
+  --systems-line: #ffffff26;
+  --systems-font-body: Arial, sans-serif;
+  --systems-font-display: Georgia, serif;
+  --systems-text: clamp(1rem, 1.3vw, 1.2rem);
+  --systems-heading: clamp(2.25rem, 5vw, 4.75rem);
+  --systems-space-xs: .75rem;
+  --systems-space-sm: 1.5rem;
+  --systems-space-md: 2.5rem;
+  --systems-space-lg: clamp(4rem, 9vw, 8rem);
+  --systems-gutter: clamp(1.5rem, 7vw, 7rem);
+  --systems-container: 72rem;
+  --systems-card-radius: .5rem;
+  --systems-focus-width: 2px;
+  --systems-focus-offset: 5px;
+  --systems-anchor-offset: 6rem;
+  background: var(--systems-bg);
+  color: var(--systems-paper);
+  font-family: var(--systems-font-body);
+  overflow-wrap: anywhere;
+}
+.systems-container { width: min(100%, var(--systems-container)); margin-inline: auto; }
+.edition-chapter { padding: var(--systems-space-lg) var(--systems-gutter); border-top: 1px solid var(--systems-line); scroll-margin-top: var(--systems-anchor-offset); }
+.edition-chapter h2 { max-width: 18ch; margin: var(--systems-space-sm) 0; font: 400 var(--systems-heading)/1.08 var(--systems-font-display); letter-spacing: -.035em; text-wrap: balance; }
+.edition-chapter p { max-width: 42rem; font-size: var(--systems-text); line-height: 1.7; color: var(--systems-muted); margin: 0 0 var(--systems-space-sm); }
+.edition-chapter .chapter-label, .edition-chapter .edition-marker { font-size: .75rem; letter-spacing: .12em; }
+.edition-chapter .chapter-label { text-transform: uppercase; }
+.edition-chapter .edition-marker { display: inline-block; padding: .6rem .9rem; border: 1px solid var(--systems-signal); border-radius: 2rem; color: var(--systems-signal); }
+.edition-chapter .systems-brand-statement { color: var(--systems-paper); }
+.edition-overview, .systems-finale { background: radial-gradient(ellipse at top right, #283327, transparent 65%), var(--systems-bg); }
+.capability-card { padding: var(--systems-space-sm); border: 1px solid var(--systems-line); border-radius: var(--systems-card-radius); background: var(--systems-panel); min-width: 0; }
+.systems-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--systems-space-sm); margin-top: var(--systems-space-md); }
+.systems-action, .systems-text-action { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .8rem 1.2rem; font-size: 1rem; }
+.systems-action { background: var(--systems-signal); color: var(--systems-bg); border-radius: var(--systems-card-radius); }
+.systems-text-action { text-decoration: underline; text-underline-offset: .35em; }
+.connected-systems-main :focus-visible { outline: var(--systems-focus-width) solid var(--systems-signal); outline-offset: var(--systems-focus-offset); }
+@media (max-width: 700px) {
+  .connected-systems-main { --systems-gutter: 1.5rem; --systems-space-lg: 3.5rem; --systems-space-md: 2rem; --systems-anchor-offset: 5rem; }
+  .edition-chapter h2 { max-width: 100%; }
+  .systems-actions { align-items: stretch; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .connected-systems-main { scroll-behavior: auto; }
+}
